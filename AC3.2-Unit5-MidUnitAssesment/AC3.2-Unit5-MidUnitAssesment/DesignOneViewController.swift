@@ -47,8 +47,43 @@ class DesignOneViewController: UIViewController, CellTitled {
   
   func setupViewHierarchy() {
     // Add Views Here
+    let nonBarViews = [grayContainer, leftLabel, rightLabel, audioChannelsLabel]
+
+    for nbv in nonBarViews {
+        self.view.addSubview(nbv)
+        nbv.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    let audioChannelsConstraints = [
+        audioChannelsLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20.0),
+        audioChannelsLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+    ]
     
+    let leftLabelConstraints = [
+        leftLabel.bottomAnchor.constraint(equalTo: audioChannelsLabel.topAnchor, constant: -20.0),
+        leftLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -100.0)
+    ]
     
+    let rightLabelConstraints = [
+        rightLabel.firstBaselineAnchor.constraint(equalTo: leftLabel.firstBaselineAnchor),
+        rightLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 100.0)
+    ]
+    
+    let grayContainerConstraints = [
+        grayContainer.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: self.standardMargin),
+        grayContainer.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: self.standardMargin),
+        grayContainer.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -self.standardMargin),
+        grayContainer.bottomAnchor.constraint(equalTo: leftLabel.topAnchor, constant: -self.standardMargin)
+    ]
+    
+    let _ = [
+        audioChannelsConstraints,
+        leftLabelConstraints,
+        rightLabelConstraints,
+        grayContainerConstraints
+        ].map{ $0.map{ $0.isActive = true } }
+    
+    /*
     self.view.addSubview(left1View)
     self.view.addSubview(left2View)
     self.view.addSubview(left3View)
@@ -77,8 +112,8 @@ class DesignOneViewController: UIViewController, CellTitled {
         left3View.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.25),
         left3View.heightAnchor.constraint(equalTo: left3View.widthAnchor)
         ].map { $0.isActive = true }
-  }
-  
+  */
+    }
   
   func configureConstraints() {
     // Add Constraints Here
@@ -86,7 +121,39 @@ class DesignOneViewController: UIViewController, CellTitled {
   
   
   // MARK: - Define Your Views Here
-  
+    
+    lazy var grayContainer: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = self.soundBarGray
+        return view
+    }()
+    
+    lazy var leftLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: self.subLabelFontSize)
+        label.textColor = .white
+        label.text = "Left"
+        return label
+    }()
+    
+    lazy var rightLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: self.subLabelFontSize)
+        label.textColor = .white
+        label.text = "Right"
+        return label
+    }()
+    
+    lazy var audioChannelsLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: self.mainLabelFontSize)
+        label.textColor = .white
+        label.text = "Audio Channels"
+        return label
+    }()
+    
+    
+/*
     lazy var num1Label: UILabel = {
         let label = UILabel()
         label.text = "1"
@@ -121,14 +188,10 @@ class DesignOneViewController: UIViewController, CellTitled {
         label.font = UIFont.systemFont(ofSize: self.mainLabelFontSize)
         return label
     }()
+    */
+
     
-    lazy var grayContainder: UIView = {
-        let view: UIView = UIView()
-        view.backgroundColor = self.soundBarGray
-        return view
-    }()
-    
-    
+    /*
     lazy var left1View: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = self.soundBarGreen
@@ -158,7 +221,9 @@ class DesignOneViewController: UIViewController, CellTitled {
         view.backgroundColor = self.soundBarRed
         return view
     }()
-    
+ 
+ */
+    /*
     
     lazy var right1View: UIView = {
         let view: UIView = UIView()
@@ -189,8 +254,48 @@ class DesignOneViewController: UIViewController, CellTitled {
         view.backgroundColor = self.soundBarRed
         return view
     }()
+ */
+    var barViews = [UIView]()
     
-    
+//    lazy var grayContainder: UIView = {
+//        let view: UIView = UIView()
+//        view.backgroundColor = self.soundBarGray
+//        return view
+//    }()
+//    
+//    lazy var left5View: UIView = {
+//        let view: UIView = UIView()
+//        view.backgroundColor = self.soundBarRed
+//        return view
+//    }()
+
+    /* go back to this
+    func setUpBarViews() {
+        for i in 0..<10 {
+            barViews.append(UIView())
+            self.view.addSubview(barViews[i])
+            barViews[i].translatesAutoresizingMaskIntoConstraints = false
+            
+            switch i {
+            case 0:
+                let _ = [
+                    barViews[i].leadingAnchor.constraint(equalTo: self.grayContainder.leadingAnchor, constant: self.barMargin),
+                    barViews[i].topAnchor.constraint(equalTo: self.grayContainder.topAnchor, constant: self.barMargin),
+                    barViews[i].trailingAnchor.constraint(equalTo: left5View.leadingAnchor, constant: self.standardMargin),
+//                    greenViews[i].bottomAnchor.constraint(equalTo: _)
+                    ].map { $0.isActive = true }
+
+            default:
+                let _ = [
+                    greenViews[i].leadingAnchor.constraint(equalTo: self.greenViews[i-1].trailingAnchor),
+                    greenViews[i].topAnchor.constraint(equalTo: self.greenViews[i-1].bottomAnchor),
+                    greenViews[i].widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: CGFloat(1/Double(self.greenViews.count))),
+                    greenViews[i].heightAnchor.constraint(equalTo: greenViews[i].widthAnchor)
+                    ].map { $0.isActive = true }
+            }
+        }
+    }
+ */
     
 
 }
