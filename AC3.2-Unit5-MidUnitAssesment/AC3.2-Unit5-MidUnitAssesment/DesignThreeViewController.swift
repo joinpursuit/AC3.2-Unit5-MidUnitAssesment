@@ -88,6 +88,7 @@ class DesignThreeViewController: UIViewController, CellTitled {
     
     self.setupViewHierarchy()
     self.configurePortraitConstraints()
+//    self.configureLandscapeConstraints()
   }
   
   func setupViewHierarchy() {
@@ -111,6 +112,10 @@ class DesignThreeViewController: UIViewController, CellTitled {
     hexLabel.translatesAutoresizingMaskIntoConstraints = false
     
     self.edgesForExtendedLayout = []
+    
+    bannerImageView.isHidden = false
+    contentView.isHidden = false
+    
     
     let bannerImageConstraints = [
       bannerImageView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -165,14 +170,102 @@ class DesignThreeViewController: UIViewController, CellTitled {
   }
   
   func configureLandscapeConstraints() {
+    bannerImageView.translatesAutoresizingMaskIntoConstraints = false
+    profileImageView.translatesAutoresizingMaskIntoConstraints = false
+    nameLabel.translatesAutoresizingMaskIntoConstraints = false
+    contentView.translatesAutoresizingMaskIntoConstraints = false
+    followLabel.translatesAutoresizingMaskIntoConstraints = false
+    likeLabel.translatesAutoresizingMaskIntoConstraints = false
+    hexLabel.translatesAutoresizingMaskIntoConstraints = false
     
+    bannerImageView.isHidden = true
+    contentView.isHidden = true
+    
+    self.edgesForExtendedLayout = []
+    
+    let profileImageConstraints = [
+        profileImageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+        profileImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+        profileImageView.heightAnchor.constraint(equalToConstant: 120.0),
+        profileImageView.widthAnchor.constraint(equalToConstant: 120.0)
+        ]
+    
+    let nameLabelConstraints = [
+        nameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 16.0),
+        nameLabel.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor)
+//        nameLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 8.0),
+//        nameLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8.0)
+        ]
+    
+    let likeLabelConstraints = [
+        likeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8.0),
+        likeLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        ]
+    
+    let followLabelConstraints = [
+        followLabel.centerYAnchor.constraint(equalTo: likeLabel.centerYAnchor),
+        followLabel.trailingAnchor.constraint(equalTo: likeLabel.leadingAnchor, constant: -8.0)
+    ]
+    
+    let hexLabelConstraints = [
+        hexLabel.centerYAnchor.constraint(equalTo: likeLabel.centerYAnchor),
+        hexLabel.leadingAnchor.constraint(equalTo: likeLabel.trailingAnchor, constant: 8.0)
+    ]
+        
+    _ = [
+        profileImageConstraints,
+        nameLabelConstraints,
+        followLabelConstraints,
+        likeLabelConstraints,
+        hexLabelConstraints
+        ].map { $0.map { $0.isActive = true } }
   }
   
-  override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-    super.willTransition(to: newCollection, with: coordinator)
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        // switch to landscape/portrait using UITraitCollection's info about size class
+        let oldTraitCollection = self.traitCollection
+        //print(">>\n\n\n")
+        print(oldTraitCollection)
+        //print(">>\n\n\n")
+        print(newCollection)
+        super.willTransition(to: newCollection, with: coordinator)
+        
+            let _ = [
+                self.profileImageView.constraints,
+                self.nameLabel.constraints,
+                self.contentView.constraints,
+                self.bannerImageView.constraints,
+                self.hexLabel.constraints,
+                self.likeLabel.constraints,
+                self.followLabel.constraints
+                ].map { $0.map{ $0.isActive = false } }
+        
+        self.view.removeConstraints(view.constraints)
+        
+        if (oldTraitCollection.verticalSizeClass == .regular) && (newCollection.verticalSizeClass == .compact) {
+            configurePortraitConstraints()
+        } else {
+            configureLandscapeConstraints()
+        }
+    }
     
-    // switch to landscape/portrait using UITraitCollection's info about size class
-  }
-  
-  
+//    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+//        
+//        
+//        let _ = self.blueView.constraints.map { $0.isActive = false }
+//        let _ = self.redView.constraints.map { $0.isActive = false }
+//        self.view.removeConstraints(self.view.constraints)
+//        let currentCollection = self.traitCollection
+//        
+//        if (currentCollection.verticalSizeClass == .compact) && (newCollection.verticalSizeClass == .regular) {
+//            exerciseTwo()
+//        }
+//        else {
+//            exerciseFour()
+//        }
+//        
+//        super.willTransition(to: newCollection, with: coordinator)
+//    }
 }
+

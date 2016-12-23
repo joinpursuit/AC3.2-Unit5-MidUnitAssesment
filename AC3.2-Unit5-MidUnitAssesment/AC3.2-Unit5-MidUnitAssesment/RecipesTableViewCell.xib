@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="RecipesTableViewCell" customModule="AC3_2_Unit5_MidUnitAssesment" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="378" height="135"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="378" height="134"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="etR-4F-uvu">
+                        <rect key="frame" x="16" y="16" width="346" height="21"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KgU-8e-Rqk" userLabel="Ingredients">
+                        <rect key="frame" x="24" y="45" width="330" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bc4-gy-sJD" userLabel="Thumbnail">
+                        <rect key="frame" x="14" y="72" width="350" height="46"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="KgU-8e-Rqk" firstAttribute="top" secondItem="etR-4F-uvu" secondAttribute="bottom" constant="8" id="Gzh-7y-A7H"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="bc4-gy-sJD" secondAttribute="bottom" constant="8" id="RYc-jN-4Rn"/>
+                    <constraint firstItem="bc4-gy-sJD" firstAttribute="top" secondItem="KgU-8e-Rqk" secondAttribute="bottom" constant="8" id="XOo-4G-HqZ"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="bc4-gy-sJD" secondAttribute="trailing" constant="8" id="hjt-ia-Kqj"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="KgU-8e-Rqk" secondAttribute="trailing" constant="16" id="lAY-4k-qXC"/>
+                    <constraint firstItem="bc4-gy-sJD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="n8w-Na-ub2"/>
+                    <constraint firstItem="etR-4F-uvu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="pD7-br-R1l"/>
+                    <constraint firstItem="etR-4F-uvu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="ttl-zp-BYt"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="etR-4F-uvu" secondAttribute="trailing" constant="8" id="xLs-yJ-Buq"/>
+                    <constraint firstItem="KgU-8e-Rqk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="zcY-NH-v9j"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ingredientsLabel" destination="KgU-8e-Rqk" id="Lvw-kv-8Rc"/>
+                <outlet property="thumbLabel" destination="bc4-gy-sJD" id="nM7-Ji-tlV"/>
+                <outlet property="titleLabel" destination="etR-4F-uvu" id="8K6-5X-aeP"/>
+            </connections>
+            <point key="canvasLocation" x="63" y="170.5"/>
+        </tableViewCell>
+    </objects>
+</document>
