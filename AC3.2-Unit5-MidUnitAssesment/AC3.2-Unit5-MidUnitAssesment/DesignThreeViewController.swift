@@ -92,10 +92,10 @@ class DesignThreeViewController: UIViewController, CellTitled {
   
   func setupViewHierarchy() {
     self.view.backgroundColor = .white
-    self.view.addSubview(bannerImageView)
+    self.view.addSubview(bannerImageView) //NO NEEDED
     self.view.addSubview(profileImageView)
     self.view.addSubview(nameLabel)
-    self.view.addSubview(contentView)
+    self.view.addSubview(contentView)//NO NEEDED
     self.view.addSubview(followLabel)
     self.view.addSubview(likeLabel)
     self.view.addSubview(hexLabel)
@@ -139,7 +139,7 @@ class DesignThreeViewController: UIViewController, CellTitled {
     ]
     
     let followLabelConstraints = [
-      followLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8.0),
+        followLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8),
       followLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -8.0)
     ]
     

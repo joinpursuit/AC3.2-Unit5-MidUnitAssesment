@@ -14,7 +14,7 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
    
     // Comment #1
     // fix the declaration of fetchedResultsController
-    //var fetchedResultsController: NSFetchedResultsController<Entry>!
+    var fetchedResultsController: NSFetchedResultsController<Recipe>!
 
     var mainContext: NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -23,6 +23,12 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Registration
+        tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifier")
+        
+//        tableView.rowHeight = UITableViewAutomaticDimension
+//        tableView.estimatedRowHeight = 200
 
         self.title = titleForCell
         
@@ -49,22 +55,31 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
                         let records = wholeDict["results"] as? [[String:Any]] {
                         
                         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                        let pc = appDelegate.persistentContainer
-                        pc.performBackgroundTask { (context: NSManagedObjectContext) in
-                            context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+                        let pc = appDelegate.persistentContainer.viewContext
+//                        pc.performBackgroundTask { (context: NSManagedObjectContext) in
+//                            context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
        
                             // Comment #2
                             // insert your core data objects here
+              
+                        
+                                for record in records {
+                                    // now it goes in the database
+                                    let recipe = NSEntityDescription.insertNewObject(forEntityName: "Recipe", into: pc)as! Recipe
+                                    recipe.populate(from: record)
+                            
+                                }
+                            
                             
                             do {
-                                try context.save()
+                                try pc.save()
                             }
                             catch let error {
                                 print(error)
                             }
                             
                             DispatchQueue.main.async {
-                                self.initializeFetchedResultsController()
+//                                self.initializeFetchedResultsController()
                                 self.tableView.reloadData()
                             }
                         }
@@ -76,12 +91,12 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 0
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 0
     }
@@ -101,40 +116,44 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     // on the Coffee Log app. It will require some customization
     // to this project.
     func initializeFetchedResultsController() {
-//        let request: NSFetchRequest<Entry> = Entry.fetchRequest()
-//        let sort = NSSortDescriptor(key: "date", ascending: true)
-//        request.sortDescriptors = [sort]
-//        
-//        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
-//        fetchedResultsController.delegate = self
-//        
-//        do {
-//            try fetchedResultsController.performFetch()
-//        } catch {
-//            fatalError("Failed to initialize FetchedResultsController: \(error)")
-//        }
+        let request = NSFetchRequest<Recipe>(entityName: "Recipe")
+        let sort = NSSortDescriptor(key: "date", ascending: true)
+        request.sortDescriptors = [sort]
+        
+    
+        
+        /*
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController.delegate = self
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError("Failed to initialize FetchedResultsController: \(error)")
+        }*/
     }
     
     // MARK: - Search Bar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // Comment #4
-        self.initializeFetchedResultsController(/* you will need to re-init this with search/filter text*/)
-        self.tableView.reloadData()
+//        self.initializeFetchedResultsController(/* you will need to re-init this with search/filter text*/)
+//        self.tableView.reloadData()
     }
     
     // MARK: - Text Field
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if let search = textField.text {
-            self.getData(search: search)
-            self.tableView.reloadData()
-        }
+//        if let search = textField.text {
+//            self.getData(search: search)
+//            self.tableView.reloadData()
+        //}
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let search = textField.text {
-            self.getData(search: search)
-            self.tableView.reloadData()
-        }
-        return true
-    }
+//        if let search = textField.text {
+//            self.getData(search: search)
+//            self.tableView.reloadData()
+//        }
+       return true
 }
+
