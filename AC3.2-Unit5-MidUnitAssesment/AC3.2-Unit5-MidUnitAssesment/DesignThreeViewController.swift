@@ -87,7 +87,7 @@ class DesignThreeViewController: UIViewController, CellTitled {
     super.viewDidLoad()
     
     self.setupViewHierarchy()
-    self.configureLandscapeConstraints()
+    self.configurePortraitConstraints()
   }
   
   func setupViewHierarchy() {
@@ -165,10 +165,18 @@ class DesignThreeViewController: UIViewController, CellTitled {
   }
   
   func configureLandscapeConstraints() {
-    //bannerImageView.translatesAutoresizingMaskIntoConstraints = false <-not present!
+    
+    // what i would want to do is remove the views that are not present
+    
+    self.view.backgroundColor = .white
+    self.view.addSubview(profileImageView)
+    self.view.addSubview(nameLabel)
+    self.view.addSubview(followLabel)
+    self.view.addSubview(likeLabel)
+    self.view.addSubview(hexLabel)
+    
     profileImageView.translatesAutoresizingMaskIntoConstraints = false
     nameLabel.translatesAutoresizingMaskIntoConstraints = false
-    //contentView.translatesAutoresizingMaskIntoConstraints = false <-not present!
     followLabel.translatesAutoresizingMaskIntoConstraints = false
     likeLabel.translatesAutoresizingMaskIntoConstraints = false
     hexLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -177,7 +185,7 @@ class DesignThreeViewController: UIViewController, CellTitled {
         profileImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
         profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         profileImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
-        profileImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.2)
+        profileImageView.widthAnchor.constraint(equalTo: profileImageView.heightAnchor)
     ]
 
     let nameLabelConstraints = [
@@ -197,7 +205,7 @@ class DesignThreeViewController: UIViewController, CellTitled {
     
     let hexLabelConstraints = [
         hexLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
-        hexLabel.trailingAnchor.constraint(equalTo: likeLabel.leadingAnchor, constant: -8.0)
+        hexLabel.leadingAnchor.constraint(equalTo: likeLabel.trailingAnchor, constant: -8.0)
     ]
     
     let _ = [
