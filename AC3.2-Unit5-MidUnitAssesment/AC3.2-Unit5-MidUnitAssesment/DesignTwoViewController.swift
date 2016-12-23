@@ -23,7 +23,7 @@ class DesignTwoViewController: UIViewController, CellTitled {
   lazy var smittenKittenImageView: UIImageView = {
     let image = UIImage(named: "smitten_kitten")
     let imageView = UIImageView(image: image)
-    imageView.contentMode = .scaleAspectFit
+    imageView.contentMode = .scaleAspectFill
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
@@ -33,6 +33,7 @@ class DesignTwoViewController: UIViewController, CellTitled {
     scroll.alwaysBounceHorizontal = false
     scroll.alwaysBounceVertical = false
     scroll.translatesAutoresizingMaskIntoConstraints = false
+    scroll.accessibilityIdentifier = "SCROLL"
     return scroll
   }()
   
@@ -41,6 +42,7 @@ class DesignTwoViewController: UIViewController, CellTitled {
     label.font = UIFont.systemFont(ofSize: 36.0)
     label.textColor = UIColor(red: 1.0, green: 83.0/255.0, blue: 42.0/255.0, alpha: 1.0)
     label.text = "Smitt'n Kitt'ns"
+    label.accessibilityIdentifier = "LABEL"
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -73,12 +75,13 @@ class DesignTwoViewController: UIViewController, CellTitled {
     // something about these constraints isn't right...
     
     let labelConstraints = [
-      smittenKittenLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 16.0),
-      smittenKittenLabel.centerXAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24.0)
-    ]
+      smittenKittenLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 68), //view.top 16
+      smittenKittenLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 110),
+//      smittenKittenLabel.centerXAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24.0)
+        ]
     
     let scrollViewConstraints = [
-      scrollView.topAnchor.constraint(equalTo: self.smittenKittenLabel.bottomAnchor, constant: 16.0),
+      scrollView.topAnchor.constraint(equalTo: self.smittenKittenLabel.bottomAnchor),
       scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8.0),
       scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -8.0),
       scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -8.0)
@@ -86,10 +89,11 @@ class DesignTwoViewController: UIViewController, CellTitled {
     
     let imageConstraints = [
       smittenKittenImageView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
+      smittenKittenImageView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
       smittenKittenImageView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
+      smittenKittenImageView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor),
     ]
     
     let _ = [labelConstraints, scrollViewConstraints, imageConstraints].map{ $0.map{ $0.isActive = true } }
   }
-  
 }
