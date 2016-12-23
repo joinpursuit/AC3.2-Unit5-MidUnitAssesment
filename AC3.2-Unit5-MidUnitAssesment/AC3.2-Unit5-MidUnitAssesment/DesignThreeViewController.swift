@@ -110,7 +110,7 @@ class DesignThreeViewController: UIViewController, CellTitled {
     likeLabel.translatesAutoresizingMaskIntoConstraints = false
     hexLabel.translatesAutoresizingMaskIntoConstraints = false
     
-    self.edgesForExtendedLayout = []
+    self.edgesForExtendedLayout = .bottom
     
     let bannerImageConstraints = [
       bannerImageView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -165,14 +165,24 @@ class DesignThreeViewController: UIViewController, CellTitled {
   }
   
   func configureLandscapeConstraints() {
+    //bannerImageView.translatesAutoresizingMaskIntoConstraints = false
+    profileImageView.translatesAutoresizingMaskIntoConstraints = false
+    nameLabel.translatesAutoresizingMaskIntoConstraints = false
+    //contentView.translatesAutoresizingMaskIntoConstraints = false
+    followLabel.translatesAutoresizingMaskIntoConstraints = false
+    likeLabel.translatesAutoresizingMaskIntoConstraints = false
+    hexLabel.translatesAutoresizingMaskIntoConstraints = false
     
+    self.edgesForExtendedLayout = .bottom
   }
   
   override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
     super.willTransition(to: newCollection, with: coordinator)
-    
     // switch to landscape/portrait using UITraitCollection's info about size class
+    if self.traitCollection.verticalSizeClass == .compact {
+        configureLandscapeConstraints()
+    } else {
+        configurePortraitConstraints()
+    }
   }
-  
-  
 }
