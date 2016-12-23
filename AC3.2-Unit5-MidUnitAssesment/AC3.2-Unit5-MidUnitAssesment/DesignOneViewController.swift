@@ -46,27 +46,47 @@ class DesignOneViewController: UIViewController, CellTitled {
   
   
   func setupViewHierarchy() {
-//    let grayView = UIView()
-//    grayView.translatesAutoresizingMaskIntoConstraints = false
-//    grayView.backgroundColor = soundBarGray
-//    view.addSubview(grayView)
+
   }
   
   
   func configureConstraints() {
     grayView.translatesAutoresizingMaskIntoConstraints = false
+    redViewRight.translatesAutoresizingMaskIntoConstraints = false
+    redViewLeft.translatesAutoresizingMaskIntoConstraints = false
+
     grayView.backgroundColor = soundBarGray
+    redViewLeft.backgroundColor = soundBarRed
+    redViewRight.backgroundColor = soundBarRed
     view.addSubview(grayView)
+    view.addSubview(redViewRight)
+    view.addSubview(redViewLeft)
 
     grayView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     grayView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     grayView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true
     grayView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.75).isActive = true
+    
+    redViewLeft.centerXAnchor.constraint(equalTo: grayView.centerXAnchor).isActive = true
+    redViewLeft.centerYAnchor.constraint(equalTo: grayView.centerYAnchor).isActive = true
+    redViewLeft.widthAnchor.constraint(equalTo: grayView.widthAnchor, multiplier: 0.25).isActive = true
+    redViewLeft.heightAnchor.constraint(equalTo: grayView.heightAnchor, multiplier: 0.07).isActive = true
+    
   }
   
   
   // MARK: - Define Your Views Here
     let grayView = UIView()
+    let redViewRight = UIView()
+    let redViewLeft = UIView()
+    let yellowViewRightTop = UIView()
+    let yellowViewRightBottom = UIView()
+    let yellowViewLeftTop = UIView()
+    let yellowViewLeftBottom = UIView()
+    let greenViewRightTop = UIView()
+    let greenViewRightBottom = UIView()
+    let greenViewLeftTop = UIView()
+    let greenViewLeftBottom = UIView()
   // ex:
   // let grayContainer: UIView = ... your code here ...
   // let leftGreen1: UIView = ... your code here ...
