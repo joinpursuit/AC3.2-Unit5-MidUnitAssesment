@@ -46,7 +46,11 @@ class DesignOneViewController: UIViewController, CellTitled {
   
   
   func setupViewHierarchy() {
-    // Add Views Here
+     var greyView: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = .lightGray
+        return view
+    }()
   }
   
   
@@ -58,10 +62,22 @@ class DesignOneViewController: UIViewController, CellTitled {
   // MARK: - Define Your Views Here
   
   // ex: 
-  // let grayContainer: UIView = ... your code here ...
-  // let leftGreen1: UIView = ... your code here ...
-  // let leftGreen2: UIView = ... your code here ...
-  //
+    let grayContainer: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = .lightGray
+        return view
+    }()
+    let leftGreen1: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = .green
+        return view
+    }()
+    let leftGreen2: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = .green
+        return view
+    }()
   
+    
 
 }
