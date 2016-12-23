@@ -43,62 +43,40 @@ class DesignOneViewController: UIViewController, CellTitled {
     self.configureConstraints()
     self.title = titleForCell
     
-    let label1 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-    label1.center = CGPoint(x: 160, y: 285)
-    label1.textAlignment = .center
     label1.text = "1"
-    self.view.addSubview(label1)
-    
-    let label2 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-    label2.center = CGPoint(x: 160, y: 285)
-    label2.textAlignment = .center
     label2.text = "2"
-    self.view.addSubview(label2)
-    
-    let label3 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-    label3.center = CGPoint(x: 160, y: 285)
-    label3.textAlignment = .center
     label3.text = "3"
-    self.view.addSubview(label3)
-    
-    let label4 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-    label4.center = CGPoint(x: 160, y: 285)
-    label4.textAlignment = .center
     label4.text = "4"
-    self.view.addSubview(label4)
-    
-    let label5 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-    label5.center = CGPoint(x: 160, y: 285)
-    label5.textAlignment = .center
     label5.text = "5"
-    self.view.addSubview(label5)
-    
-    let labelRight = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-    labelRight.center = CGPoint(x: 160, y: 285)
-    labelRight.textAlignment = .center
     labelRight.textColor = .white
     labelRight.text = "Right"
-    self.view.addSubview(labelRight)
-    
-    let labelLeft = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-    labelLeft.center = CGPoint(x: 160, y: 285)
-    labelLeft.textAlignment = .center
     labelLeft.text = "Left"
     labelLeft.textColor = .white
-    self.view.addSubview(labelLeft)
-    
-    let labelAudio = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-    labelAudio.center = CGPoint(x: 160, y: 285)
-    labelAudio.textAlignment = .center
     labelAudio.text = "Audio Channels"
     labelAudio.textColor = .white
-    self.view.addSubview(labelAudio)
   }
-  
   
   func setupViewHierarchy() {
-
-  }
+    view.addSubview(grayView)
+    view.addSubview(redViewRight)
+    view.addSubview(redViewLeft)
+    view.addSubview(yellowViewLeftTop)
+    view.addSubview(yellowViewLeftBottom)
+    view.addSubview(yellowViewRightTop)
+    view.addSubview(yellowViewRightBottom)
+    view.addSubview(greenViewLeftTop)
+    view.addSubview(greenViewLeftBottom)
+    view.addSubview(greenViewRightTop)
+    view.addSubview(greenViewRightBottom)
+    view.addSubview(label1)
+    view.addSubview(label2)
+    view.addSubview(label3)
+    view.addSubview(label4)
+    view.addSubview(label5)
+    view.addSubview(labelLeft)
+    view.addSubview(labelRight)
+    view.addSubview(labelAudio)
+    }
   
   
   func configureConstraints() {
@@ -125,17 +103,7 @@ class DesignOneViewController: UIViewController, CellTitled {
     greenViewLeftBottom.backgroundColor = soundBarGreen
     greenViewRightTop.backgroundColor = soundBarGreen
     greenViewRightBottom.backgroundColor = soundBarGreen
-    view.addSubview(grayView)
-    view.addSubview(redViewRight)
-    view.addSubview(redViewLeft)
-    view.addSubview(yellowViewLeftTop)
-    view.addSubview(yellowViewLeftBottom)
-    view.addSubview(yellowViewRightTop)
-    view.addSubview(yellowViewRightBottom)
-    view.addSubview(greenViewLeftTop)
-    view.addSubview(greenViewLeftBottom)
-    view.addSubview(greenViewRightTop)
-    view.addSubview(greenViewRightBottom)
+    
     
 
     grayView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -194,7 +162,8 @@ class DesignOneViewController: UIViewController, CellTitled {
     greenViewLeftBottom.heightAnchor.constraint(equalTo: greenViewLeftTop.heightAnchor).isActive = true
     greenViewLeftBottom.leadingAnchor.constraint(equalTo: greenViewLeftTop.leadingAnchor).isActive = true
     
-    
+    labelAudio.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 5.0).isActive = true
+    labelAudio.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
   }
   
   
@@ -210,4 +179,12 @@ class DesignOneViewController: UIViewController, CellTitled {
     let greenViewRightBottom = UIView()
     let greenViewLeftTop = UIView()
     let greenViewLeftBottom = UIView()
-}
+    let label1 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    let label2 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    let label3 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    let label4 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    let label5 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    let labelRight = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    let labelLeft = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    let labelAudio = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    }
