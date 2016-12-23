@@ -13,11 +13,14 @@
 		14229F3D1E0C82B3000085ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14229F3B1E0C82B3000085ED /* LaunchScreen.storyboard */; };
 		14229F451E0C82D4000085ED /* IndexTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14229F441E0C82D4000085ED /* IndexTableViewController.swift */; };
 		14229F481E0C8594000085ED /* DesignOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14229F471E0C8594000085ED /* DesignOneViewController.swift */; };
-		1E245A521E0D0550007A8064 /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E245A511E0D0550007A8064 /* APIRequestManager.swift */; };
-		1EC1CFE61E0CD78D00634BC5 /* RecipesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC1CFE41E0CD78D00634BC5 /* RecipesTableViewController.swift */; };
 		14AE96FC1E0CD8C6002E066A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AE96FB1E0CD8C6002E066A /* Utilities.swift */; };
 		14AE96FE1E0CDF6C002E066A /* DesignTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AE96FD1E0CDF6C002E066A /* DesignTwoViewController.swift */; };
 		14AE97001E0CF393002E066A /* DesignThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AE96FF1E0CF393002E066A /* DesignThreeViewController.swift */; };
+		1E245A521E0D0550007A8064 /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E245A511E0D0550007A8064 /* APIRequestManager.swift */; };
+		1EC1CFE61E0CD78D00634BC5 /* RecipesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC1CFE41E0CD78D00634BC5 /* RecipesTableViewController.swift */; };
+		E3EB96091E0DB4A500C068E4 /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EB96081E0DB4A500C068E4 /* RecipeTableViewCell.swift */; };
+		E3EB960B1E0DB4C100C068E4 /* RecipeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3EB960A1E0DB4C100C068E4 /* RecipeTableViewCell.xib */; };
+		E3EB960D1E0DB58900C068E4 /* Recipe+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EB960C1E0DB58900C068E4 /* Recipe+JSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,11 +32,14 @@
 		14229F3E1E0C82B3000085ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14229F441E0C82D4000085ED /* IndexTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexTableViewController.swift; sourceTree = "<group>"; };
 		14229F471E0C8594000085ED /* DesignOneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignOneViewController.swift; sourceTree = "<group>"; };
-		1E245A511E0D0550007A8064 /* APIRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
-		1EC1CFE41E0CD78D00634BC5 /* RecipesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesTableViewController.swift; sourceTree = "<group>"; };
 		14AE96FB1E0CD8C6002E066A /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		14AE96FD1E0CDF6C002E066A /* DesignTwoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignTwoViewController.swift; sourceTree = "<group>"; };
 		14AE96FF1E0CF393002E066A /* DesignThreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignThreeViewController.swift; sourceTree = "<group>"; };
+		1E245A511E0D0550007A8064 /* APIRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
+		1EC1CFE41E0CD78D00634BC5 /* RecipesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesTableViewController.swift; sourceTree = "<group>"; };
+		E3EB96081E0DB4A500C068E4 /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecipeTableViewCell.swift; path = ../RecipeTableViewCell.swift; sourceTree = "<group>"; };
+		E3EB960A1E0DB4C100C068E4 /* RecipeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RecipeTableViewCell.xib; path = ../RecipeTableViewCell.xib; sourceTree = "<group>"; };
+		E3EB960C1E0DB58900C068E4 /* Recipe+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Recipe+JSON.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +116,9 @@
 			isa = PBXGroup;
 			children = (
 				1EC1CFE41E0CD78D00634BC5 /* RecipesTableViewController.swift */,
+				E3EB96081E0DB4A500C068E4 /* RecipeTableViewCell.swift */,
+				E3EB960C1E0DB58900C068E4 /* Recipe+JSON.swift */,
+				E3EB960A1E0DB4C100C068E4 /* RecipeTableViewCell.xib */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -175,6 +184,7 @@
 			files = (
 				14229F3D1E0C82B3000085ED /* LaunchScreen.storyboard in Resources */,
 				14229F3A1E0C82B3000085ED /* Assets.xcassets in Resources */,
+				E3EB960B1E0DB4C100C068E4 /* RecipeTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +196,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E245A521E0D0550007A8064 /* APIRequestManager.swift in Sources */,
+				E3EB96091E0DB4A500C068E4 /* RecipeTableViewCell.swift in Sources */,
+				E3EB960D1E0DB58900C068E4 /* Recipe+JSON.swift in Sources */,
 				14229F451E0C82D4000085ED /* IndexTableViewController.swift in Sources */,
 				14229F381E0C82B3000085ED /* AC3_2_Unit5_MidUnitAssesment.xcdatamodeld in Sources */,
 				14229F301E0C82B3000085ED /* AppDelegate.swift in Sources */,
