@@ -181,8 +181,21 @@ class DesignThreeViewController: UIViewController, CellTitled {
     
     bannerImageView.translatesAutoresizingMaskIntoConstraints = true
     contentView.translatesAutoresizingMaskIntoConstraints = true
-
     
+    _ = [
+        bannerImageView.topAnchor.constraint(equalTo: view.topAnchor),
+        bannerImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        bannerImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        bannerImageView.heightAnchor.constraint(equalToConstant: 200.0)
+        ].map { $0.isActive = false }
+    
+    _ = [
+        contentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8.0),
+        contentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -8.0),
+        contentView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8.0),
+        contentView.bottomAnchor.constraint(equalTo: followLabel.topAnchor, constant: -8.0)
+        ].map { $0.isActive = false }
+
     let profileImageConstraints = [
         // why doesn't this know where the middle of the view is in landsacpe!!!!????
         profileImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -224,6 +237,16 @@ class DesignThreeViewController: UIViewController, CellTitled {
     // switch to landscape/portrait using UITraitCollection's info about size class
     
     self.view.removeConstraints(self.view.constraints)
+    
+    // this made it worse...
+//    self.bannerImageView.removeConstraints(bannerImageView.constraints)
+//    self.contentView.removeConstraints(contentView.constraints)
+//    self.followLabel.removeConstraints(followLabel.constraints)
+//    self.hexLabel.removeConstraints(hexLabel.constraints)
+//    self.likeLabel.removeConstraints(likeLabel.constraints)
+//    self.nameLabel.removeConstraints(nameLabel.constraints)
+//    self.profileImageView.removeConstraints(profileImageView.constraints)
+    
     let currentCollection = self.traitCollection
     
     if (currentCollection.verticalSizeClass == .compact) && (newCollection.verticalSizeClass == .regular) {

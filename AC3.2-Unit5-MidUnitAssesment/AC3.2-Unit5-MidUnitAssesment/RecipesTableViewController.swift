@@ -27,6 +27,7 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
         self.title = titleForCell
         self.tableView.register(UINib(nibName: "RecipieTableViewCell", bundle: nil), forCellReuseIdentifier: "RecipieTableViewCell")
         tableView.estimatedRowHeight = 300
+        navigationItem.rightBarButtonItem = editButtonItem
         
         initializeFetchedResultsController()
         
@@ -86,6 +87,11 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     }
     
     // MARK: - Table view data source
+    
+    // Stack Overflow...
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         guard let sections = fetchedResultsController.sections else { return 0 }
@@ -100,13 +106,11 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
         return sectionInfo.name
     }
 
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sections = fetchedResultsController.sections else { return 0 }
         return sections[section].numberOfObjects
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecipieTableViewCell", for: indexPath) as! RecipieTableViewCell
         let recipie = fetchedResultsController.object(at: indexPath)
@@ -123,10 +127,48 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
         }
     }
     
-    // Stack Overflow...
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let object = fetchedResultsController.object(at: indexPath)
+            mainContext.delete(object)
+        }
     }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert:
+            tableView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
+        case .delete:
+            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
+        case .move:
+            break
+        case .update:
+            break
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .automatic)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .automatic)
+        case .update:
+            tableView.reloadRows(at: [indexPath!], with: .automatic)
+        case .move:
+            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        }
+    }
+
+
     
     
     // Comment #3

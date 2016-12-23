@@ -10,6 +10,9 @@ import UIKit
 
 class RecipieTableViewCell: UITableViewCell {
     
+    
+    @IBOutlet weak var thumbNailImageView: UIImageView!
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var ingredientsLabel: UILabel!
