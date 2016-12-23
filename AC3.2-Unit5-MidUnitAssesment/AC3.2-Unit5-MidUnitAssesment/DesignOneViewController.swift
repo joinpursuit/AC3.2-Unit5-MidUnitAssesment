@@ -54,28 +54,53 @@ class DesignOneViewController: UIViewController, CellTitled {
     grayView.translatesAutoresizingMaskIntoConstraints = false
     redViewRight.translatesAutoresizingMaskIntoConstraints = false
     redViewLeft.translatesAutoresizingMaskIntoConstraints = false
+    yellowViewLeftBottom.translatesAutoresizingMaskIntoConstraints = false
+    yellowViewLeftTop.translatesAutoresizingMaskIntoConstraints = false
+    yellowViewRightTop.translatesAutoresizingMaskIntoConstraints = false
+    yellowViewRightBottom.translatesAutoresizingMaskIntoConstraints = false
 
     grayView.backgroundColor = soundBarGray
     redViewLeft.backgroundColor = soundBarRed
     redViewRight.backgroundColor = soundBarRed
+    yellowViewLeftTop.backgroundColor = soundBarYellow
+    yellowViewLeftBottom.backgroundColor = soundBarYellow
+    yellowViewRightTop.backgroundColor = soundBarYellow
+    yellowViewRightTop.backgroundColor = soundBarYellow
     view.addSubview(grayView)
     view.addSubview(redViewRight)
     view.addSubview(redViewLeft)
+    view.addSubview(yellowViewLeftTop)
+    view.addSubview(yellowViewLeftBottom)
+    view.addSubview(yellowViewRightTop)
+    view.addSubview(yellowViewRightBottom)
+    
 
     grayView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     grayView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     grayView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true
     grayView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.7).isActive = true
     
-    redViewLeft.centerYAnchor.constraint(equalTo: grayView.centerYAnchor).isActive = true
+    redViewLeft.centerYAnchor.constraint(equalTo: grayView.topAnchor, constant: 30.0).isActive = true
     redViewLeft.widthAnchor.constraint(equalTo: grayView.widthAnchor, multiplier: 0.25).isActive = true
     redViewLeft.heightAnchor.constraint(equalTo: grayView.heightAnchor, multiplier: 0.07).isActive = true
-    redViewLeft.trailingAnchor.constraint(equalTo: grayView.centerXAnchor, constant: 5).isActive = true
+    redViewLeft.trailingAnchor.constraint(equalTo: grayView.centerXAnchor).isActive = true
+    redViewLeft.leadingAnchor.constraint(equalTo: grayView.leadingAnchor, constant: 30).isActive = true
     
-    redViewRight.centerYAnchor.constraint(equalTo: grayView.centerYAnchor).isActive = true
+    redViewRight.centerYAnchor.constraint(equalTo: grayView.topAnchor, constant: 30.0).isActive = true
     redViewRight.widthAnchor.constraint(equalTo: grayView.widthAnchor, multiplier: 0.25).isActive = true
     redViewRight.heightAnchor.constraint(equalTo: grayView.heightAnchor, multiplier: 0.07).isActive = true
-    redViewRight.leadingAnchor.constraint(equalTo: grayView.centerXAnchor, constant: 5).isActive = true
+    redViewRight.leadingAnchor.constraint(equalTo: grayView.centerXAnchor, constant: 30.0).isActive = true
+    
+    yellowViewLeftTop.centerYAnchor.constraint(equalTo: redViewLeft.topAnchor, constant: 30.0).isActive = true
+    yellowViewLeftTop.widthAnchor.constraint(equalTo: redViewLeft.widthAnchor).isActive = true
+    yellowViewLeftTop.heightAnchor.constraint(equalTo: redViewLeft.heightAnchor).isActive = true
+    yellowViewLeftTop.leadingAnchor.constraint(equalTo: redViewLeft.leadingAnchor).isActive = true
+
+    
+//    yellowViewLeftBottom.widthAnchor.constraint(equalTo: grayView.widthAnchor, multiplier: 0.25).isActive = true
+//    yellowViewRightTop.heightAnchor.constraint(equalTo: grayView.heightAnchor, multiplier: 0.07).isActive = true
+//    yellowViewRightBottom.trailingAnchor.constraint(equalTo: grayView.centerXAnchor).isActive = true
+//    yellowViewLeftTop.leadingAnchor.constraint(equalTo: grayView.leadingAnchor, constant: 30).isActive = true
     
   }
   
