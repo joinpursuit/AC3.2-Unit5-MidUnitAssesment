@@ -65,12 +65,17 @@ class DesignOneViewController: UIViewController, CellTitled {
     grayView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     grayView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     grayView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true
-    grayView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.75).isActive = true
+    grayView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.7).isActive = true
     
-    redViewLeft.centerXAnchor.constraint(equalTo: grayView.centerXAnchor).isActive = true
     redViewLeft.centerYAnchor.constraint(equalTo: grayView.centerYAnchor).isActive = true
     redViewLeft.widthAnchor.constraint(equalTo: grayView.widthAnchor, multiplier: 0.25).isActive = true
     redViewLeft.heightAnchor.constraint(equalTo: grayView.heightAnchor, multiplier: 0.07).isActive = true
+    redViewLeft.trailingAnchor.constraint(equalTo: grayView.centerXAnchor, constant: 5).isActive = true
+    
+    redViewRight.centerYAnchor.constraint(equalTo: grayView.centerYAnchor).isActive = true
+    redViewRight.widthAnchor.constraint(equalTo: grayView.widthAnchor, multiplier: 0.25).isActive = true
+    redViewRight.heightAnchor.constraint(equalTo: grayView.heightAnchor, multiplier: 0.07).isActive = true
+    redViewRight.leadingAnchor.constraint(equalTo: grayView.centerXAnchor, constant: 5).isActive = true
     
   }
   
