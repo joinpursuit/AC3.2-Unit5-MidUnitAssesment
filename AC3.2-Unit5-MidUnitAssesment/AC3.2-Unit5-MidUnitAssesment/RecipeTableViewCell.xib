@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecipeTableViewCell" customModule="AC3_2_Unit5_MidUnitAssesment" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCell" rowHeight="100" id="KGk-i7-Jjw" customClass="RecipeTableViewCell" customModule="AC3_2_Unit5_MidUnitAssesment" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <frame key="frameInset" width="320" height="99.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="URL" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ees-wW-PTD">
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qiR-Pl-DxU" customClass="re">
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="buq-KK-LUE">
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Ees-wW-PTD" secondAttribute="bottom" id="0Jf-qf-DDc"/>
+                    <constraint firstItem="qiR-Pl-DxU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="31" id="3F7-1e-dR0"/>
+                    <constraint firstAttribute="trailing" secondItem="Ees-wW-PTD" secondAttribute="trailing" id="De7-gn-ehf"/>
+                    <constraint firstAttribute="bottom" secondItem="Ees-wW-PTD" secondAttribute="bottom" constant="0.5" id="HiA-Ex-pui"/>
+                    <constraint firstItem="buq-KK-LUE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="MAT-3P-CQA"/>
+                    <constraint firstAttribute="trailing" secondItem="qiR-Pl-DxU" secondAttribute="trailing" id="UC7-JJ-45o"/>
+                    <constraint firstAttribute="trailing" secondItem="buq-KK-LUE" secondAttribute="trailing" id="dWc-tH-gBu"/>
+                    <constraint firstItem="Ees-wW-PTD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="eQW-3g-91s"/>
+                    <constraint firstItem="Ees-wW-PTD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="hfT-9i-fgq"/>
+                    <constraint firstItem="qiR-Pl-DxU" firstAttribute="top" secondItem="buq-KK-LUE" secondAttribute="bottom" constant="9" id="oy9-pj-9mI"/>
+                    <constraint firstAttribute="trailing" secondItem="Ees-wW-PTD" secondAttribute="trailing" id="qCT-EB-TnV"/>
+                    <constraint firstItem="buq-KK-LUE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="vbg-rH-QAi"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ingredientsLabel" destination="qiR-Pl-DxU" id="s47-VW-feF"/>
+                <outlet property="titleLabel" destination="buq-KK-LUE" id="bnd-ON-84U"/>
+                <outlet property="urlLabel" destination="Ees-wW-PTD" id="JZO-Ep-B7R"/>
+            </connections>
+            <point key="canvasLocation" x="20" y="-10"/>
+        </tableViewCell>
+    </objects>
+</document>
