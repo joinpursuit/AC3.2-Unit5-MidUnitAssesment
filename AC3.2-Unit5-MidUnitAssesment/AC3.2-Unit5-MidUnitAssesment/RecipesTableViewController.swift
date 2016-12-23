@@ -14,7 +14,7 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
    
     // Comment #1
     // fix the declaration of fetchedResultsController
-    //var fetchedResultsController: NSFetchedResultsController<Entry>!
+    var fetchedResultsController: NSFetchedResultsController<Recipe>!
 
     var mainContext: NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -23,7 +23,13 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.initializeFetchedResultsController()
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 50
+        getData()
+        
+        tableView.register(UINib(nibName: "RecipeTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "RecipeCell")
+    
         self.title = titleForCell
         
         // entering text in the textField in the Navigation Bar collects more recipe results
@@ -48,13 +54,29 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
                     if let wholeDict = jsonData as? [String:Any],
                         let records = wholeDict["results"] as? [[String:Any]] {
                         
+
+                        
                         let appDelegate = UIApplication.shared.delegate as! AppDelegate
                         let pc = appDelegate.persistentContainer
                         pc.performBackgroundTask { (context: NSManagedObjectContext) in
                             context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-       
+    
                             // Comment #2
                             // insert your core data objects here
+                            
+//                                // now it goes in the database
+
+                            for each in records {
+                                let title = each["title"] as? String
+                                let href = each["href"] as? String
+                                let ingredients = each["ingredients"] as? String
+                                
+                                let object = Recipe(context: context)
+                                object.title = title
+                                object.href = href
+                                object.ingredients = ingredients
+                            
+                                object.populate(from: each)
                             
                             do {
                                 try context.save()
@@ -62,7 +84,7 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
                             catch let error {
                                 print(error)
                             }
-                            
+                        }
                             DispatchQueue.main.async {
                                 self.initializeFetchedResultsController()
                                 self.tableView.reloadData()
@@ -77,42 +99,92 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        guard let sections = fetchedResultsController.sections else {
+            print("No sections in fetchedResultsController")
+            return 0
+        }
+        return sections.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        guard let sections = fetchedResultsController.sections else {
+            fatalError("No sections in fetchedResultsController")
+        }
+        let sectionInfo = sections[section]
+        return sectionInfo.numberOfObjects
     }
-
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as! RecipeTableViewCell
+        configureCell(cell, indexPath: indexPath)
         return cell
     }
-    */
     
+    func configureCell(_ cell: RecipeTableViewCell, indexPath: IndexPath) {
+        let recipe = fetchedResultsController.object(at: indexPath)
+        cell.titleLabel.text = recipe.title
+        cell.hrefLabel?.text = recipe.href
+        cell.ingredientsLabel.text = recipe.ingredients
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert:
+            tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .delete:
+            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .move:
+            break
+        case .update:
+            break
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            if let ip = indexPath {
+                tableView.deleteRows(at: [ip], with: .fade)
+            }
+        case .update:
+            if let ip = indexPath,
+                let cell = tableView.cellForRow(at: ip) {
+                configureCell(cell as! RecipeTableViewCell, indexPath: ip)
+            }
+        case .move:
+            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+
+
+
     // Comment #3
     // this function is based partly on our projects and partly 
     // on the Coffee Log app. It will require some customization
     // to this project.
     func initializeFetchedResultsController() {
-//        let request: NSFetchRequest<Entry> = Entry.fetchRequest()
-//        let sort = NSSortDescriptor(key: "date", ascending: true)
-//        request.sortDescriptors = [sort]
-//        
-//        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
-//        fetchedResultsController.delegate = self
-//        
-//        do {
-//            try fetchedResultsController.performFetch()
-//        } catch {
-//            fatalError("Failed to initialize FetchedResultsController: \(error)")
-//        }
+        let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()
+        let sort = NSSortDescriptor(key: "title", ascending: true)
+        request.sortDescriptors = [sort]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController.delegate = self
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError("Failed to initialize FetchedResultsController: \(error)")
+        }
     }
     
     // MARK: - Search Bar
@@ -126,6 +198,7 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let search = textField.text {
             self.getData(search: search)
+            self.initializeFetchedResultsController()
             self.tableView.reloadData()
         }
     }
@@ -133,6 +206,7 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let search = textField.text {
             self.getData(search: search)
+            self.initializeFetchedResultsController()
             self.tableView.reloadData()
         }
         return true
