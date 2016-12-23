@@ -47,7 +47,8 @@ class DesignOneViewController: UIViewController, CellTitled {
     
     func setupViewHierarchy() {
         // Add Views Here
-        let nonBarViews = [grayContainer, leftLabel, rightLabel, audioChannelsLabel, num5Label]
+
+        let nonBarViews = [grayContainer, leftLabel, rightLabel, audioChannelsLabel, num5Label, num4Label, num3Label, num2Label, num1Label]
         
         for nbv in nonBarViews {
             self.view.addSubview(nbv)
@@ -76,9 +77,31 @@ class DesignOneViewController: UIViewController, CellTitled {
             grayContainer.bottomAnchor.constraint(equalTo: leftLabel.topAnchor, constant: -self.standardMargin)
         ]
         
+        setUpBarViews()
+        
         let num5LabelConstraints = [
-            num5Label.topAnchor.constraint(equalTo: grayContainer.topAnchor, constant: self.standardMargin),
-            num5Label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+            num5Label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            num5Label.centerYAnchor.constraint(equalTo: self.barViews[0].centerYAnchor)
+        ]
+        
+        let num4LabelConstraints = [
+            num4Label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            num4Label.centerYAnchor.constraint(equalTo: self.barViews[1].centerYAnchor)
+        ]
+        
+        let num3LabelConstraints = [
+            num3Label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            num3Label.centerYAnchor.constraint(equalTo: self.barViews[2].centerYAnchor)
+        ]
+        
+        let num2LabelConstraints = [
+            num2Label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            num2Label.centerYAnchor.constraint(equalTo: self.barViews[3].centerYAnchor)
+        ]
+        
+        let num1LabelConstraints = [
+            num1Label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            num1Label.centerYAnchor.constraint(equalTo: self.barViews[4].centerYAnchor)
         ]
         
         let _ = [
@@ -86,40 +109,14 @@ class DesignOneViewController: UIViewController, CellTitled {
             leftLabelConstraints,
             rightLabelConstraints,
             grayContainerConstraints,
-            num5LabelConstraints
+            num5LabelConstraints,
+            num4LabelConstraints,
+            num3LabelConstraints,
+            num2LabelConstraints,
+            num1LabelConstraints,
             ].map{ $0.map{ $0.isActive = true } }
         
-        setUpBarViews()
-        /*
-         self.view.addSubview(left1View)
-         self.view.addSubview(left2View)
-         self.view.addSubview(left3View)
-         self.view.addSubview(left4View)
-         self.view.addSubview(left5View)
-         self.view.addSubview(right1View)
-         self.view.addSubview(right2View)
-         self.view.addSubview(right3View)
-         self.view.addSubview(right4View)
-         self.view.addSubview(right5View)
-         
-         self.left1View.translatesAutoresizingMaskIntoConstraints = false
-         self.left2View.translatesAutoresizingMaskIntoConstraints = false
-         self.left3View.translatesAutoresizingMaskIntoConstraints = false
-         self.left4View.translatesAutoresizingMaskIntoConstraints = false
-         self.left5View.translatesAutoresizingMaskIntoConstraints = false
-         self.right1View.translatesAutoresizingMaskIntoConstraints = false
-         self.right2View.translatesAutoresizingMaskIntoConstraints = false
-         self.right3View.translatesAutoresizingMaskIntoConstraints = false
-         self.right4View.translatesAutoresizingMaskIntoConstraints = false
-         self.right5View.translatesAutoresizingMaskIntoConstraints = false
-         
-         let _ = [
-         left3View.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-         left3View.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor),
-         left3View.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.25),
-         left3View.heightAnchor.constraint(equalTo: left3View.widthAnchor)
-         ].map { $0.isActive = true }
-         */
+
     }
     
     func configureConstraints() {
@@ -166,6 +163,34 @@ class DesignOneViewController: UIViewController, CellTitled {
         return label
     }()
     
+    lazy var num4Label: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: self.subLabelFontSize)
+        label.text = "4"
+        return label
+    }()
+    
+    lazy var num3Label: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: self.subLabelFontSize)
+        label.text = "3"
+        return label
+    }()
+    
+    lazy var num2Label: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: self.subLabelFontSize)
+        label.text = "2"
+        return label
+    }()
+    
+    lazy var num1Label: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: self.subLabelFontSize)
+        label.text = "1"
+        return label
+    }()
+    
     var barViews = [UIView]()
     
     func setUpBarViews() {
@@ -174,31 +199,34 @@ class DesignOneViewController: UIViewController, CellTitled {
             self.view.addSubview(barViews[i])
             barViews[i].translatesAutoresizingMaskIntoConstraints = false
             barViews[i].backgroundColor = self.soundBarRed
-            
-            var constraintsArr = [barViews[i].heightAnchor.constraint(equalTo: num5Label.heightAnchor, multiplier: 1.2)]
-            
+            var constraintsArr = [barViews[i].heightAnchor.constraint(equalToConstant: 35.0)]
             switch i {
             case 0:
                 constraintsArr += [
                     barViews[i].leadingAnchor.constraint(equalTo: self.grayContainer.leadingAnchor, constant: self.barMargin),
                     barViews[i].topAnchor.constraint(equalTo: self.grayContainer.topAnchor, constant: self.barMargin),
-                    barViews[i].trailingAnchor.constraint(equalTo: num5Label.leadingAnchor, constant: -self.standardMargin),
+                    barViews[i].trailingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -16.0),
                 ]
-                
+                barViews[i].backgroundColor = self.soundBarRed
             case 5:
                 constraintsArr += [
-                    barViews[i].leadingAnchor.constraint(equalTo: num5Label.trailingAnchor, constant: self.standardMargin),
+                    barViews[i].leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 16.0),
                     barViews[i].trailingAnchor.constraint(equalTo: self.grayContainer.trailingAnchor, constant: -self.barMargin),
                     barViews[i].topAnchor.constraint(equalTo: self.grayContainer.topAnchor, constant: self.barMargin),
-                    
                 ]
-                
+                barViews[i].backgroundColor = self.soundBarRed
             default:
                 constraintsArr +=  [
                     barViews[i].leadingAnchor.constraint(equalTo: self.barViews[i-1].leadingAnchor),
                     barViews[i].topAnchor.constraint(equalTo: self.barViews[i-1].bottomAnchor, constant: self.barMargin),
                     barViews[i].trailingAnchor.constraint(equalTo: self.barViews[i-1].trailingAnchor),
                 ]
+                switch i {
+                case 1, 2, 6, 7:
+                    barViews[i].backgroundColor = self.soundBarYellow
+                default:
+                    barViews[i].backgroundColor = self.soundBarGreen
+                }
             }
             _ = constraintsArr.map { $0.isActive = true }
         }
