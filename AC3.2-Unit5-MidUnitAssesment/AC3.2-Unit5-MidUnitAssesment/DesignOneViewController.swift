@@ -54,11 +54,10 @@ class DesignOneViewController: UIViewController, CellTitled {
   
   
   func configureConstraints() {
-    let grayView = UIView()
     grayView.translatesAutoresizingMaskIntoConstraints = false
     grayView.backgroundColor = soundBarGray
     view.addSubview(grayView)
-    
+
     grayView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     grayView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     grayView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true
@@ -67,8 +66,8 @@ class DesignOneViewController: UIViewController, CellTitled {
   
   
   // MARK: - Define Your Views Here
-  
-  // ex: 
+    let grayView = UIView()
+  // ex:
   // let grayContainer: UIView = ... your code here ...
   // let leftGreen1: UIView = ... your code here ...
   // let leftGreen2: UIView = ... your code here ...
