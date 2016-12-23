@@ -14,17 +14,38 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
    
     // Comment #1
     // fix the declaration of fetchedResultsController
-    //var fetchedResultsController: NSFetchedResultsController<Entry>!
+    var fetchedResultsController: NSFetchedResultsController<Food>!
 
     var mainContext: NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = titleForCell
+        
+        /*
+         grabbing this from ElementsPart2 project w/ Elber & Karen last night, will github it later tonight:
+         
+         getData()
+         
+         let request: NSFetchRequest<Food> = Element.fetchRequest()
+         request.sortDescriptors =
+         [NSSortDescriptor(key: #keyPath(Element.number), ascending: true)]
+         
+         controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+         controller.delegate = self
+         do {
+         try controller.performFetch()
+         print("We fetched!!")
+         }
+         catch let error {
+         print("No fetch. Error: ", error)
+         }
+
+         */
         
         // entering text in the textField in the Navigation Bar collects more recipe results
         // and should insert them into Core Data
@@ -55,6 +76,9 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
        
                             // Comment #2
                             // insert your core data objects here
+                            
+                            let thisRecipe = NSEntityDescription.insertNewObject(forEntityName: "Food", into: self.mainContext) as! Food
+                            thisRecipe.populateFrom(dict: wholeDict)
                             
                             do {
                                 try context.save()
