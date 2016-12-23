@@ -26,27 +26,6 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
 
         self.title = titleForCell
         
-        /*
-         grabbing this from ElementsPart2 project w/ Elber & Karen last night, will github it later tonight:
-         
-         getData()
-         
-         let request: NSFetchRequest<Food> = Element.fetchRequest()
-         request.sortDescriptors =
-         [NSSortDescriptor(key: #keyPath(Element.number), ascending: true)]
-         
-         controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-         controller.delegate = self
-         do {
-         try controller.performFetch()
-         print("We fetched!!")
-         }
-         catch let error {
-         print("No fetch. Error: ", error)
-         }
-
-         */
-        
         // entering text in the textField in the Navigation Bar collects more recipe results
         // and should insert them into Core Data
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
@@ -134,18 +113,19 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     // on the Coffee Log app. It will require some customization
     // to this project.
     func initializeFetchedResultsController() {
-//        let request: NSFetchRequest<Entry> = Entry.fetchRequest()
-//        let sort = NSSortDescriptor(key: "date", ascending: true)
-//        request.sortDescriptors = [sort]
-//        
-//        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
-//        fetchedResultsController.delegate = self
-//        
-//        do {
-//            try fetchedResultsController.performFetch()
-//        } catch {
-//            fatalError("Failed to initialize FetchedResultsController: \(error)")
-//        }
+        let request: NSFetchRequest<Food> = Food.fetchRequest()
+        let sort = NSSortDescriptor(key: "recipeTitle", ascending: true)
+        request.sortDescriptors = [sort]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController.delegate = self
+        
+        do {
+            try fetchedResultsController.performFetch()
+            print("We got data!!!")
+        } catch {
+            fatalError("Failed to initialize FetchedResultsController: \(error)")
+        }
     }
     
     // MARK: - Search Bar
