@@ -77,7 +77,12 @@ class DesignOneViewController: UIViewController, CellTitled {
             if foo == greyBG {
                 foo.layer.zPosition = 1
             } else {
-                foo.layer.zPosition = 2000
+                switch foo {
+                case label1, label2, label3, label4, label5:
+                    foo.layer.zPosition = 2001
+                default:
+                    foo.layer.zPosition = 2000
+                }
             }
         }
         
@@ -87,44 +92,49 @@ class DesignOneViewController: UIViewController, CellTitled {
         greyBG.backgroundColor = soundBarGray
         // bottom labels
         leftLabel.textColor = .white
-        leftLabel.font = UIFont.boldSystemFont(ofSize: subLabelFontSize)
+        leftLabel.font = UIFont.systemFont(ofSize: subLabelFontSize)
         leftLabel.text = "Left"
         centerLabel.textColor = .white
-        centerLabel.font = UIFont.boldSystemFont(ofSize: mainLabelFontSize)
+        centerLabel.font = UIFont.systemFont(ofSize: mainLabelFontSize)
         centerLabel.text = "Audio Channels"
         rightLabel.textColor = .white
-        rightLabel.font = UIFont.boldSystemFont(ofSize: subLabelFontSize)
+        rightLabel.font = UIFont.systemFont(ofSize: subLabelFontSize)
         rightLabel.text = "Right"
         // 5
         redBarFiveLeft.backgroundColor = soundBarRed
         label5.backgroundColor = soundBarGray
-        label5.font = UIFont.boldSystemFont(ofSize: subLabelFontSize)
+        label5.font = UIFont.systemFont(ofSize: subLabelFontSize)
         label5.text = "5"
+        label5.textAlignment = .center
         redBarFiveRight.backgroundColor = soundBarRed
         // 4
         yellowBarFourLeft.backgroundColor = soundBarYellow
         label4.backgroundColor = soundBarGray
-        label4.font = UIFont.boldSystemFont(ofSize: subLabelFontSize)
+        label4.font = UIFont.systemFont(ofSize: subLabelFontSize)
         label4.text = "4"
-        yellowBarFourLeft.backgroundColor = soundBarYellow
+        label4.textAlignment = .center
+        yellowBarFourRight.backgroundColor = soundBarYellow
         // 3
         yellowBarThreeLeft.backgroundColor = soundBarYellow
         label3.backgroundColor = soundBarGray
-        label3.font = UIFont.boldSystemFont(ofSize: subLabelFontSize)
+        label3.font = UIFont.systemFont(ofSize: subLabelFontSize)
         label3.text = "3"
-        yellowBarThreeLeft.backgroundColor = soundBarYellow
+        label3.textAlignment = .center
+        yellowBarThreeRight.backgroundColor = soundBarYellow
         // 2
         greenBarTwoLeft.backgroundColor = soundBarGreen
         label2.backgroundColor = soundBarGray
-        label2.font = UIFont.boldSystemFont(ofSize: subLabelFontSize)
+        label2.font = UIFont.systemFont(ofSize: subLabelFontSize)
         label2.text = "2"
-        greenBarTwoLeft.backgroundColor = soundBarGreen
+        label2.textAlignment = .center
+        greenBarTwoRight.backgroundColor = soundBarGreen
         // 1
         greenBarOneLeft.backgroundColor = soundBarGreen
         label1.backgroundColor = soundBarGray
-        label1.font = UIFont.boldSystemFont(ofSize: subLabelFontSize)
+        label1.font = UIFont.systemFont(ofSize: subLabelFontSize)
         label1.text = "1"
-        greenBarOneLeft.backgroundColor = soundBarGreen
+        label1.textAlignment = .center
+        greenBarOneRight.backgroundColor = soundBarGreen
     }
     
     
@@ -136,53 +146,73 @@ class DesignOneViewController: UIViewController, CellTitled {
             , greyBG.topAnchor.constraint(equalTo: view.topAnchor, constant: standardMargin)
             , greyBG.heightAnchor.constraint(equalToConstant: 550)
             // 5
-            , label5.topAnchor.constraint(equalTo: view.topAnchor, constant: 50)
+            , label5.topAnchor.constraint(equalTo: greyBG.topAnchor, constant: 50)
             , label5.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-            , redBarFiveLeft.widthAnchor.constraint(equalToConstant: 100)
-            , redBarFiveLeft.trailingAnchor.constraint(equalTo: label5.leadingAnchor)
-            , redBarFiveRight.widthAnchor.constraint(equalToConstant: 100)
-            , redBarFiveRight.leadingAnchor.constraint(equalTo: label5.leadingAnchor)
-            , redBarFiveRight.topAnchor.constraint(equalTo: view.topAnchor, constant: 50)
-            , redBarFiveLeft.topAnchor.constraint(equalTo: view.topAnchor, constant: 50)
+            , label5.heightAnchor.constraint(equalToConstant: 50)
+            , label5.widthAnchor.constraint(equalToConstant: 32)
+            , redBarFiveLeft.widthAnchor.constraint(equalToConstant: 150)
+            , redBarFiveLeft.heightAnchor.constraint(equalToConstant: 50)
+            , redBarFiveLeft.trailingAnchor.constraint(equalTo: label5.leadingAnchor, constant: standardMargin)
+            , redBarFiveRight.widthAnchor.constraint(equalToConstant: 150)
+            , redBarFiveRight.heightAnchor.constraint(equalToConstant: 50)
+            , redBarFiveRight.leadingAnchor.constraint(equalTo: label5.trailingAnchor, constant: -standardMargin)
+            , redBarFiveRight.topAnchor.constraint(equalTo: greyBG.topAnchor, constant: 50)
+            , redBarFiveLeft.topAnchor.constraint(equalTo: greyBG.topAnchor, constant: 50)
             // 4
             , label4.topAnchor.constraint(equalTo: label5.bottomAnchor, constant: 50)
             , label4.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-            , yellowBarFourLeft.widthAnchor.constraint(equalToConstant: 100)
-            , yellowBarFourLeft.trailingAnchor.constraint(equalTo: label5.leadingAnchor)
-            , yellowBarFourRight.widthAnchor.constraint(equalToConstant: 100)
-            , yellowBarFourRight.leadingAnchor.constraint(equalTo: label4.leadingAnchor)
+            , label4.heightAnchor.constraint(equalToConstant: 50)
+            , label4.widthAnchor.constraint(equalToConstant: 32)
+            , yellowBarFourLeft.widthAnchor.constraint(equalToConstant: 150)
+            , yellowBarFourLeft.heightAnchor.constraint(equalToConstant: 50)
+            , yellowBarFourLeft.trailingAnchor.constraint(equalTo: label5.leadingAnchor, constant: standardMargin)
+            , yellowBarFourRight.heightAnchor.constraint(equalToConstant: 50)
+            , yellowBarFourRight.widthAnchor.constraint(equalToConstant: 150)
+            , yellowBarFourRight.leadingAnchor.constraint(equalTo: label4.trailingAnchor, constant: -standardMargin)
             , yellowBarFourRight.topAnchor.constraint(equalTo: redBarFiveRight.bottomAnchor, constant: 50)
             , yellowBarFourLeft.topAnchor.constraint(equalTo: redBarFiveLeft.bottomAnchor, constant: 50)
             // 3
             , label3.topAnchor.constraint(equalTo: label4.bottomAnchor, constant: 50)
             , label3.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-            , yellowBarThreeLeft.widthAnchor.constraint(equalToConstant: 100)
-            , yellowBarThreeLeft.trailingAnchor.constraint(equalTo: label3.leadingAnchor)
-            , yellowBarThreeRight.widthAnchor.constraint(equalToConstant: 100)
-            , yellowBarThreeRight.leadingAnchor.constraint(equalTo: label3.leadingAnchor)
+            , label3.heightAnchor.constraint(equalToConstant: 50)
+            , label3.widthAnchor.constraint(equalToConstant: 32)
+            , yellowBarThreeLeft.widthAnchor.constraint(equalToConstant: 150)
+            , yellowBarThreeLeft.heightAnchor.constraint(equalToConstant: 50)
+            , yellowBarThreeLeft.trailingAnchor.constraint(equalTo: label3.leadingAnchor, constant: standardMargin)
+            , yellowBarThreeRight.widthAnchor.constraint(equalToConstant: 150)
+            , yellowBarThreeRight.heightAnchor.constraint(equalToConstant: 50)
+            , yellowBarThreeRight.leadingAnchor.constraint(equalTo: label3.trailingAnchor, constant: -standardMargin)
             , yellowBarThreeRight.topAnchor.constraint(equalTo: yellowBarFourRight.bottomAnchor, constant: 50)
             , yellowBarThreeLeft.topAnchor.constraint(equalTo: yellowBarFourLeft.bottomAnchor, constant: 50)
             // 2
             , label2.topAnchor.constraint(equalTo: label3.bottomAnchor, constant: 50)
             , label2.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-            , greenBarTwoLeft.widthAnchor.constraint(equalToConstant: 100)
-            , greenBarTwoLeft.trailingAnchor.constraint(equalTo: label2.leadingAnchor)
-            , greenBarTwoRight.widthAnchor.constraint(equalToConstant: 100)
-            , greenBarTwoRight.leadingAnchor.constraint(equalTo: label2.leadingAnchor)
+            , label2.heightAnchor.constraint(equalToConstant: 50)
+            , label2.widthAnchor.constraint(equalToConstant: 32)
+            , greenBarTwoLeft.widthAnchor.constraint(equalToConstant: 150)
+            , greenBarTwoLeft.heightAnchor.constraint(equalToConstant: 50)
+            , greenBarTwoLeft.trailingAnchor.constraint(equalTo: label2.leadingAnchor, constant: standardMargin)
+            , greenBarTwoRight.widthAnchor.constraint(equalToConstant: 150)
+            , greenBarTwoRight.heightAnchor.constraint(equalToConstant: 50)
+            , greenBarTwoRight.leadingAnchor.constraint(equalTo: label2.trailingAnchor, constant: -standardMargin)
             , greenBarTwoRight.topAnchor.constraint(equalTo: yellowBarThreeRight.bottomAnchor, constant: 50)
             , greenBarTwoLeft.topAnchor.constraint(equalTo: yellowBarThreeLeft.bottomAnchor, constant: 50)
             // 1
             , label1.topAnchor.constraint(equalTo: label2.bottomAnchor, constant: 50)
             , label1.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-            , greenBarOneLeft.widthAnchor.constraint(equalToConstant: 100)
-            , greenBarOneLeft.trailingAnchor.constraint(equalTo: label2.leadingAnchor)
-            , greenBarOneRight.widthAnchor.constraint(equalToConstant: 100)
-            , greenBarOneRight.leadingAnchor.constraint(equalTo: label2.leadingAnchor)
+            , label1.heightAnchor.constraint(equalToConstant: 50)
+            , label1.widthAnchor.constraint(equalToConstant: 32)
+            , greenBarOneLeft.widthAnchor.constraint(equalToConstant: 150)
+            , greenBarOneLeft.heightAnchor.constraint(equalToConstant: 50)
+            , greenBarOneLeft.trailingAnchor.constraint(equalTo: label1.leadingAnchor, constant: standardMargin)
+            , greenBarOneRight.widthAnchor.constraint(equalToConstant: 150)
+            , greenBarOneRight.heightAnchor.constraint(equalToConstant: 50)
+            , greenBarOneRight.leadingAnchor.constraint(equalTo: label1.trailingAnchor, constant: -standardMargin)
             , greenBarOneRight.topAnchor.constraint(equalTo: greenBarTwoRight.bottomAnchor, constant: 50)
             , greenBarOneLeft.topAnchor.constraint(equalTo: greenBarTwoLeft.bottomAnchor, constant: 50)
             // bottom labels
             , leftLabel.topAnchor.constraint(equalTo: greyBG.bottomAnchor, constant: 20)
-            , centerLabel.topAnchor.constraint(equalTo: leftLabel.bottomAnchor, constant: 40)
+            , centerLabel.topAnchor.constraint(equalTo: leftLabel.bottomAnchor, constant: 20)
             , rightLabel.topAnchor.constraint(equalTo: greyBG.bottomAnchor, constant: 20)
             , leftLabel.centerXAnchor.constraint(equalTo: redBarFiveLeft.centerXAnchor)
             , centerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
