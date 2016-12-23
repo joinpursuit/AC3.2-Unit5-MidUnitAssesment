@@ -81,8 +81,8 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // from coffeeLog
-        if let sections = fetchedResultsController.sections {
-            return sections.count
+        if fetchedResultsController.sections != nil {
+            return (fetchedResultsController.sections!.count)
         }
         return 0
     }

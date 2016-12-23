@@ -198,18 +198,21 @@ class DesignThreeViewController: UIViewController, CellTitled {
     let followLabelConstraints = [
         followLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
         followLabel.widthAnchor.constraint(equalToConstant: 75),
+        followLabel.heightAnchor.constraint(equalToConstant: 30),
         followLabel.trailingAnchor.constraint(equalTo: likeLabel.leadingAnchor, constant: 12.0)
     ]
     
     let likeLabelConstraints = [
         likeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
         likeLabel.widthAnchor.constraint(equalToConstant: 75),
+        likeLabel.heightAnchor.constraint(equalToConstant: 30),
         likeLabel.centerXAnchor.constraint(equalTo: nameLabel.centerXAnchor),
         ]
     
     let hexLabelConstraints = [
         hexLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
         hexLabel.widthAnchor.constraint(equalToConstant: 75),
+        hexLabel.heightAnchor.constraint(equalToConstant: 30),
         hexLabel.leadingAnchor.constraint(equalTo: likeLabel.trailingAnchor, constant: -12.0)
     ]
     
@@ -241,6 +244,13 @@ class DesignThreeViewController: UIViewController, CellTitled {
     followLabel.textAlignment = .center
     hexLabel.textAlignment = .center
     
+    likeLabel.layer.borderColor = UIColor.white.cgColor
+    followLabel.layer.borderColor = UIColor.white.cgColor
+    hexLabel.layer.borderColor = UIColor.white.cgColor
+    
+    likeLabel.layer.borderWidth = 2
+    followLabel.layer.borderWidth = 2
+    hexLabel.layer.borderWidth = 2
   }
   
     // github help
