@@ -131,7 +131,6 @@ class DesignOneViewController: UIViewController, CellTitled {
         audioChannelLabel.font = audioChannelLabel.font.withSize(self.mainLabelFontSize)
         audioChannelLabel.textColor = .white
         audioChannelLabel.text = "Audio Channels"
-        
     }
     
     
@@ -319,5 +318,4 @@ class DesignOneViewController: UIViewController, CellTitled {
     let leftLabel: UILabel = UILabel()
     let rightLabel: UILabel = UILabel()
     let audioChannelLabel: UILabel = UILabel()
-    
 }
