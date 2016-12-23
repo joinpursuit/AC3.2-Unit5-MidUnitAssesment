@@ -58,6 +58,10 @@ class DesignOneViewController: UIViewController, CellTitled {
     yellowViewLeftTop.translatesAutoresizingMaskIntoConstraints = false
     yellowViewRightTop.translatesAutoresizingMaskIntoConstraints = false
     yellowViewRightBottom.translatesAutoresizingMaskIntoConstraints = false
+    greenViewLeftTop.translatesAutoresizingMaskIntoConstraints = false
+    greenViewRightTop.translatesAutoresizingMaskIntoConstraints = false
+    greenViewLeftBottom.translatesAutoresizingMaskIntoConstraints = false
+    greenViewRightBottom.translatesAutoresizingMaskIntoConstraints = false
 
     grayView.backgroundColor = soundBarGray
     redViewLeft.backgroundColor = soundBarRed
@@ -66,6 +70,10 @@ class DesignOneViewController: UIViewController, CellTitled {
     yellowViewLeftBottom.backgroundColor = soundBarYellow
     yellowViewRightTop.backgroundColor = soundBarYellow
     yellowViewRightBottom.backgroundColor = soundBarYellow
+    greenViewLeftTop.backgroundColor = soundBarGreen
+    greenViewLeftBottom.backgroundColor = soundBarGreen
+    greenViewRightTop.backgroundColor = soundBarGreen
+    greenViewRightBottom.backgroundColor = soundBarGreen
     view.addSubview(grayView)
     view.addSubview(redViewRight)
     view.addSubview(redViewLeft)
@@ -73,6 +81,10 @@ class DesignOneViewController: UIViewController, CellTitled {
     view.addSubview(yellowViewLeftBottom)
     view.addSubview(yellowViewRightTop)
     view.addSubview(yellowViewRightBottom)
+    view.addSubview(greenViewLeftTop)
+    view.addSubview(greenViewLeftBottom)
+    view.addSubview(greenViewRightTop)
+    view.addSubview(greenViewRightBottom)
     
 
     grayView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -109,6 +121,27 @@ class DesignOneViewController: UIViewController, CellTitled {
     yellowViewLeftBottom.widthAnchor.constraint(equalTo: yellowViewLeftTop.widthAnchor).isActive = true
     yellowViewLeftBottom.heightAnchor.constraint(equalTo: yellowViewLeftTop.heightAnchor).isActive = true
     yellowViewLeftBottom.leadingAnchor.constraint(equalTo: yellowViewLeftTop.leadingAnchor).isActive = true
+    
+    //green rects go here:
+    greenViewLeftTop.centerYAnchor.constraint(equalTo: yellowViewLeftBottom.bottomAnchor, constant: 60.0).isActive = true
+    greenViewLeftTop.widthAnchor.constraint(equalTo: yellowViewLeftBottom.widthAnchor).isActive = true
+    greenViewLeftTop.heightAnchor.constraint(equalTo: yellowViewLeftBottom.heightAnchor).isActive = true
+    greenViewLeftTop.leadingAnchor.constraint(equalTo: yellowViewLeftBottom.leadingAnchor).isActive = true
+    
+    greenViewRightTop.centerYAnchor.constraint(equalTo: yellowViewRightBottom.bottomAnchor, constant: 60.0).isActive = true
+    greenViewRightTop.widthAnchor.constraint(equalTo: yellowViewRightBottom.widthAnchor).isActive = true
+    greenViewRightTop.heightAnchor.constraint(equalTo: yellowViewRightBottom.heightAnchor).isActive = true
+    greenViewRightTop.leadingAnchor.constraint(equalTo: yellowViewRightBottom.leadingAnchor).isActive = true
+    
+    greenViewRightBottom.centerYAnchor.constraint(equalTo: greenViewRightTop.bottomAnchor, constant: 60.0).isActive = true
+    greenViewRightBottom.widthAnchor.constraint(equalTo: greenViewRightTop.widthAnchor).isActive = true
+    greenViewRightBottom.heightAnchor.constraint(equalTo: greenViewRightTop.heightAnchor).isActive = true
+    greenViewRightBottom.leadingAnchor.constraint(equalTo: greenViewRightTop.leadingAnchor).isActive = true
+    
+    greenViewLeftBottom.centerYAnchor.constraint(equalTo: greenViewLeftTop.bottomAnchor, constant: 60.0).isActive = true
+    greenViewLeftBottom.widthAnchor.constraint(equalTo: greenViewLeftTop.widthAnchor).isActive = true
+    greenViewLeftBottom.heightAnchor.constraint(equalTo: greenViewLeftTop.heightAnchor).isActive = true
+    greenViewLeftBottom.leadingAnchor.constraint(equalTo: greenViewLeftTop.leadingAnchor).isActive = true
     
   }
   
