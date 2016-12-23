@@ -42,6 +42,12 @@ class DesignOneViewController: UIViewController, CellTitled {
     self.setupViewHierarchy()
     self.configureConstraints()
     self.title = titleForCell
+    
+    let label1 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    label1.center = CGPoint(x: 160, y: 285)
+    label1.textAlignment = .center
+    label1.text = "1"
+    self.view.addSubview(label1)
   }
   
   
