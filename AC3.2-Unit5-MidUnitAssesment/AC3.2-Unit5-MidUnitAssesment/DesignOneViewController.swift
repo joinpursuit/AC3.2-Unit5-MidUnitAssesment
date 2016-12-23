@@ -37,7 +37,7 @@ class DesignOneViewController: UIViewController, CellTitled {
   // MARK: - View Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.view.backgroundColor = .black
+    self.view.backgroundColor = .lightGray
     
     self.setupViewHierarchy()
     self.configureConstraints()
@@ -47,6 +47,7 @@ class DesignOneViewController: UIViewController, CellTitled {
   
   func setupViewHierarchy() {
     // Add Views Here
+    //self.view.addSubview(<#T##view: UIView##UIView#>)
   }
   
   
