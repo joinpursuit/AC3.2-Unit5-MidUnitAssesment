@@ -64,7 +64,7 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
                             
                             for recipieDict in records {
                                 let recipe = NSEntityDescription.insertNewObject(forEntityName: "Recipie", into: context) as! Recipie
-                                recipe.populate(from: recipieDict)
+                                recipe.populate(from: recipieDict, with: search)
                             }
                             
                             do {
@@ -91,6 +91,15 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
         guard let sections = fetchedResultsController.sections else { return 0 }
         return sections.count
     }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let sections = fetchedResultsController.sections else {
+            fatalError("No sections in fetched results controller")
+        }
+        let sectionInfo = sections[section]
+        return sectionInfo.name
+    }
+
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sections = fetchedResultsController.sections else { return 0 }
@@ -107,6 +116,13 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let recipie = fetchedResultsController.object(at: indexPath)
+        if let url = URL(string: recipie.url!) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
     // Stack Overflow...
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
@@ -119,14 +135,15 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     // to this project.
     func initializeFetchedResultsController(filter: String? = nil) {
         let request: NSFetchRequest<Recipie> = Recipie.fetchRequest()
+        let sectionSort = NSSortDescriptor(key: "searchWord", ascending: true)
         let titleSort = NSSortDescriptor(key: "title", ascending: true)
-        request.sortDescriptors = [titleSort]
+        request.sortDescriptors = [sectionSort, titleSort]
         if let filter = filter {
             let predicate: NSPredicate = NSPredicate(format: "title CONTAINS[c] %@ or ingredients CONTAINS[c] %@", filter, filter)
             request.predicate = predicate
         }
         
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: "searchWord", cacheName: nil)
         fetchedResultsController.delegate = self
         
         do {

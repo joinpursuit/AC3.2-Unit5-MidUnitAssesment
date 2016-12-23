@@ -9,7 +9,7 @@
 import Foundation
 
 extension Recipie {
-    func populate(from dict: [String: Any]) {
+    func populate(from dict: [String: Any], with searchWord: String) {
         if let title = dict["title"] as? String,
             let url = dict["href"] as? String,
             let ingredients = dict["ingredients"] as? String {
@@ -19,5 +19,6 @@ extension Recipie {
         }
         let thumbnail = dict["thumbnail"] as? String ?? ""
         self.thumbnail = thumbnail
+        self.searchWord = searchWord
     }
 }
