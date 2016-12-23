@@ -53,6 +53,7 @@ class DesignTwoViewController: UIViewController, CellTitled {
   // MARK: - View Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.edgesForExtendedLayout = .bottom
     
     self.setupViewHierarchy()
     self.configureConstraints()
@@ -74,7 +75,7 @@ class DesignTwoViewController: UIViewController, CellTitled {
     
     let labelConstraints = [
       smittenKittenLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 16.0),
-      smittenKittenLabel.centerXAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24.0)
+      smittenKittenLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
     ]
     
     let scrollViewConstraints = [
@@ -85,8 +86,12 @@ class DesignTwoViewController: UIViewController, CellTitled {
     ]
     
     let imageConstraints = [
-      smittenKittenImageView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
-      smittenKittenImageView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
+      smittenKittenImageView.topAnchor.constraint(equalTo: self.scrollView.topAnchor)
+      , smittenKittenImageView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor)
+      , smittenKittenImageView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor)
+      , smittenKittenImageView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor)
+       // , smittenKittenImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 2)
+       // , smittenKittenImageView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 2)
     ]
     
     let _ = [labelConstraints, scrollViewConstraints, imageConstraints].map{ $0.map{ $0.isActive = true } }
