@@ -46,12 +46,23 @@ class DesignOneViewController: UIViewController, CellTitled {
   
   
   func setupViewHierarchy() {
-    // Add Views Here
+    let grayView = UIView()
+    grayView.translatesAutoresizingMaskIntoConstraints = false
+    grayView.backgroundColor = soundBarGray
+    view.addSubview(grayView)
   }
   
   
   func configureConstraints() {
-    // Add Constraints Here
+    let grayView = UIView()
+    grayView.translatesAutoresizingMaskIntoConstraints = false
+    grayView.backgroundColor = soundBarGray
+    view.addSubview(grayView)
+    
+    grayView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    grayView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    grayView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+    grayView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
   }
   
   
