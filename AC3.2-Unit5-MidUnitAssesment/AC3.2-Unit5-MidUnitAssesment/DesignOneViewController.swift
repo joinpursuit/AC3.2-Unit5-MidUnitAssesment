@@ -65,7 +65,7 @@ class DesignOneViewController: UIViewController, CellTitled {
     yellowViewLeftTop.backgroundColor = soundBarYellow
     yellowViewLeftBottom.backgroundColor = soundBarYellow
     yellowViewRightTop.backgroundColor = soundBarYellow
-    yellowViewRightTop.backgroundColor = soundBarYellow
+    yellowViewRightBottom.backgroundColor = soundBarYellow
     view.addSubview(grayView)
     view.addSubview(redViewRight)
     view.addSubview(redViewLeft)
@@ -83,7 +83,6 @@ class DesignOneViewController: UIViewController, CellTitled {
     redViewLeft.centerYAnchor.constraint(equalTo: grayView.topAnchor, constant: 30.0).isActive = true
     redViewLeft.widthAnchor.constraint(equalTo: grayView.widthAnchor, multiplier: 0.25).isActive = true
     redViewLeft.heightAnchor.constraint(equalTo: grayView.heightAnchor, multiplier: 0.07).isActive = true
-    redViewLeft.trailingAnchor.constraint(equalTo: grayView.centerXAnchor).isActive = true
     redViewLeft.leadingAnchor.constraint(equalTo: grayView.leadingAnchor, constant: 30).isActive = true
     
     redViewRight.centerYAnchor.constraint(equalTo: grayView.topAnchor, constant: 30.0).isActive = true
@@ -106,10 +105,10 @@ class DesignOneViewController: UIViewController, CellTitled {
     yellowViewRightBottom.heightAnchor.constraint(equalTo: yellowViewRightTop.heightAnchor).isActive = true
     yellowViewRightBottom.leadingAnchor.constraint(equalTo: yellowViewRightTop.leadingAnchor).isActive = true
     
-//    yellowViewLeftBottom.widthAnchor.constraint(equalTo: grayView.widthAnchor, multiplier: 0.25).isActive = true
-//    yellowViewRightTop.heightAnchor.constraint(equalTo: grayView.heightAnchor, multiplier: 0.07).isActive = true
-//    yellowViewRightBottom.trailingAnchor.constraint(equalTo: grayView.centerXAnchor).isActive = true
-//    yellowViewLeftTop.leadingAnchor.constraint(equalTo: grayView.leadingAnchor, constant: 30).isActive = true
+    yellowViewLeftBottom.centerYAnchor.constraint(equalTo: yellowViewLeftTop.bottomAnchor, constant: 60.0).isActive = true
+    yellowViewLeftBottom.widthAnchor.constraint(equalTo: yellowViewLeftTop.widthAnchor).isActive = true
+    yellowViewLeftBottom.heightAnchor.constraint(equalTo: yellowViewLeftTop.heightAnchor).isActive = true
+    yellowViewLeftBottom.leadingAnchor.constraint(equalTo: yellowViewLeftTop.leadingAnchor).isActive = true
     
   }
   
@@ -126,11 +125,4 @@ class DesignOneViewController: UIViewController, CellTitled {
     let greenViewRightBottom = UIView()
     let greenViewLeftTop = UIView()
     let greenViewLeftBottom = UIView()
-  // ex:
-  // let grayContainer: UIView = ... your code here ...
-  // let leftGreen1: UIView = ... your code here ...
-  // let leftGreen2: UIView = ... your code here ...
-  //
-  
-
 }
