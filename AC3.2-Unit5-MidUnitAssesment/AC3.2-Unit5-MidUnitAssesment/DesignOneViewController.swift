@@ -91,11 +91,20 @@ class DesignOneViewController: UIViewController, CellTitled {
     redViewRight.heightAnchor.constraint(equalTo: grayView.heightAnchor, multiplier: 0.07).isActive = true
     redViewRight.leadingAnchor.constraint(equalTo: grayView.centerXAnchor, constant: 30.0).isActive = true
     
-    yellowViewLeftTop.centerYAnchor.constraint(equalTo: redViewLeft.topAnchor, constant: 30.0).isActive = true
+    yellowViewLeftTop.centerYAnchor.constraint(equalTo: redViewLeft.bottomAnchor, constant: 60.0).isActive = true
     yellowViewLeftTop.widthAnchor.constraint(equalTo: redViewLeft.widthAnchor).isActive = true
     yellowViewLeftTop.heightAnchor.constraint(equalTo: redViewLeft.heightAnchor).isActive = true
     yellowViewLeftTop.leadingAnchor.constraint(equalTo: redViewLeft.leadingAnchor).isActive = true
 
+    yellowViewRightTop.centerYAnchor.constraint(equalTo: redViewRight.bottomAnchor, constant: 60.0).isActive = true
+    yellowViewRightTop.widthAnchor.constraint(equalTo: redViewRight.widthAnchor).isActive = true
+    yellowViewRightTop.heightAnchor.constraint(equalTo: redViewRight.heightAnchor).isActive = true
+    yellowViewRightTop.leadingAnchor.constraint(equalTo: redViewRight.leadingAnchor).isActive = true
+    
+    yellowViewRightBottom.centerYAnchor.constraint(equalTo: yellowViewRightTop.bottomAnchor, constant: 60.0).isActive = true
+    yellowViewRightBottom.widthAnchor.constraint(equalTo: yellowViewRightTop.widthAnchor).isActive = true
+    yellowViewRightBottom.heightAnchor.constraint(equalTo: yellowViewRightTop.heightAnchor).isActive = true
+    yellowViewRightBottom.leadingAnchor.constraint(equalTo: yellowViewRightTop.leadingAnchor).isActive = true
     
 //    yellowViewLeftBottom.widthAnchor.constraint(equalTo: grayView.widthAnchor, multiplier: 0.25).isActive = true
 //    yellowViewRightTop.heightAnchor.constraint(equalTo: grayView.heightAnchor, multiplier: 0.07).isActive = true
