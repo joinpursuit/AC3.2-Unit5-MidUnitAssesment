@@ -133,7 +133,7 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
         let sort = NSSortDescriptor(key: "title", ascending: true)
         request.sortDescriptors = [sort]
         if let str = predi{
-            let myPre = NSPredicate(format: "SELF contains %@", str)
+            let myPre = NSPredicate(format: "%K LIKE %@", "title", "*\(str)*")
             request.predicate = myPre
         }
         

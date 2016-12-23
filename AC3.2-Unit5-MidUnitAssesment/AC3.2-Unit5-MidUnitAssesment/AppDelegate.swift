@@ -11,12 +11,10 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-  var dataController: DataController!
+
   var window: UIWindow?
 
-
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    self.dataController = DataController()
     let rootVC: IndexTableViewController = IndexTableViewController()
     let navVC: UINavigationController = UINavigationController(rootViewController: rootVC)
     self.window = UIWindow(frame: UIScreen.main.bounds)
