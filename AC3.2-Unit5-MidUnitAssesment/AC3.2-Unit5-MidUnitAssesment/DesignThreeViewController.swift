@@ -215,23 +215,23 @@ class DesignThreeViewController: UIViewController, CellTitled {
         
         
         //http://stackoverflow.com/questions/25666269/how-to-detect-orientation-change
-//        switch UIDevice.current.orientation  {
-//        case .landscapeLeft, .landscapeRight:
-//            configureLandscapeConstraints()
-//            //changeButtonStyle()
-//            bannerImageView.isHidden = true
-//            contentView.isHidden = true
-//            
-//        case .faceDown, .faceUp, .portrait:
-//            configurePortraitConstraints()
-//            bannerImageView.isHidden = false
-//            contentView.isHidden = false
-//            
-//        default:
-//            configurePortraitConstraints()
-//            bannerImageView.isHidden = false
-//            contentView.isHidden = false
-//        }
+        switch UIDevice.current.orientation  {
+        case .landscapeLeft, .landscapeRight:
+            configureLandscapeConstraints()
+            //changeButtonStyle()
+            bannerImageView.isHidden = true
+            contentView.isHidden = true
+            
+        case .faceDown, .faceUp, .portrait:
+            configurePortraitConstraints()
+            bannerImageView.isHidden = false
+            contentView.isHidden = false
+            
+        default:
+            configurePortraitConstraints()
+            bannerImageView.isHidden = false
+            contentView.isHidden = false
+        }
         
     }
     

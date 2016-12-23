@@ -50,6 +50,11 @@ class DesignOneViewController: UIViewController, CellTitled {
         // Add Views Here
         self.view.addSubview(grayContainer)
         self.grayContainer.addSubview(leftGreen1)
+        self.grayContainer.addSubview(leftGreen2)
+//        self.grayContainer.addSubview(leftRed1)
+//        self.grayContainer.addSubview(leftRed2)
+        //self.grayContainer.addSubview(leftYellow1)
+        self.grayContainer.addSubview(leftYellow2)
     }
     
     
@@ -57,6 +62,7 @@ class DesignOneViewController: UIViewController, CellTitled {
         // Add Constraints Here
         grayContainer.translatesAutoresizingMaskIntoConstraints = false
         leftGreen1.translatesAutoresizingMaskIntoConstraints = false
+        leftGreen2.translatesAutoresizingMaskIntoConstraints = false
         
         let soundBoardConstraints = [
             grayContainer.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
@@ -67,16 +73,35 @@ class DesignOneViewController: UIViewController, CellTitled {
             grayContainer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10.0)
         ]
         
+        //REFACTOR THIS
+        let yellowSoundBarLeft2 = [
+            leftYellow1.centerXAnchor.constraint(equalTo: leftGreen1.centerXAnchor),
+            leftYellow2.bottomAnchor.constraint(equalTo: leftGreen1.topAnchor),
+            leftYellow1.heightAnchor.constraint(equalToConstant: 50),
+            leftYellow1.widthAnchor.constraint(equalToConstant: 150)
+        ]
+        
         let greenSoundBarLeft1 = [
-            leftGreen1.leadingAnchor.constraint(equalTo: grayContainer.leadingAnchor),
-            leftGreen1.trailingAnchor.constraint(equalTo: grayContainer.trailingAnchor),
-            leftGreen1.heightAnchor.constraint(equalTo: grayContainer.widthAnchor, multipler: 1.0)
+            leftGreen1.topAnchor.constraint(equalTo: leftYellow1.topAnchor, constant: 48.0),
+            leftGreen1.centerXAnchor.constraint(equalTo: grayContainer.centerXAnchor, constant: -50),
+            leftGreen1.centerYAnchor.constraint(equalTo: grayContainer.centerYAnchor),
+            leftGreen1.heightAnchor.constraint(equalToConstant: 50),
+            leftGreen1.widthAnchor.constraint(equalToConstant: 150)
+        ]
+        
+        let greenSoundBarLeft2 = [
+            leftGreen2.centerXAnchor.constraint(equalTo: leftGreen1.centerXAnchor),
+            leftGreen2.topAnchor.constraint(equalTo: leftGreen1.bottomAnchor, constant: 48.0),
+            leftGreen2.heightAnchor.constraint(equalToConstant: 50),
+            leftGreen2.widthAnchor.constraint(equalToConstant: 150)
         ]
         
      
         let _ = [
             soundBoardConstraints,
-            greenSoundBarLeft1
+            greenSoundBarLeft1,
+            greenSoundBarLeft2,
+            yellowSoundBarLeft2
             ].map{ $0.map{ $0.isActive = true } }
     }
     
@@ -99,6 +124,30 @@ class DesignOneViewController: UIViewController, CellTitled {
     let leftGreen2: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(red: 104.0/255.0, green: 177.0/255.0, blue: 137.0/255.0, alpha: 1.0)
+        return view
+    }()
+    
+    let leftRed1: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 241.0/255, green: 165.0/255.0, blue: 147.0/255.0, alpha: 1.0)
+        return view
+    }()
+    
+    let leftRed2: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 241.0/255, green: 165.0/255.0, blue: 147.0/255.0, alpha: 1.0)
+        return view
+    }()
+    
+    let leftYellow1: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 251.0/255, green: 214.0/255.0, blue: 180.0/255.0, alpha: 1.0)
+        return view
+    }()
+    
+    let leftYellow2: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 251.0/255, green: 214.0/255.0, blue: 180.0/255.0, alpha: 1.0)
         return view
     }()
     

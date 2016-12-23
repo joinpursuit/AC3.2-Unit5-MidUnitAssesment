@@ -24,6 +24,12 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Register cell classes
+        //self.tableView!.register(UITableViewCell.self, forCellWithReuseIdentifier: "reuseidentifier")
+        
+        self.tableView!.register(UINib(nibName:"RecipeTableViewCell", bundle: nil), forCellWithReuseIdentifier: "reuseidentifier")
+        
+        
         self.title = titleForCell
         
         // entering text in the textField in the Navigation Bar collects more recipe results
@@ -83,18 +89,18 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-//        if let sections = fetchedResultsController.sections {
-//            return sections.count
-//        }
-        return 1
+        if let sections = fetchedResultsController.sections {
+            return sections.count
+        }
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if let sections = fetchedResultsController.sections {
-//            let info = sections[section]
-//            return info.numberOfObjects
-//        }
-        return 2
+        if let sections = fetchedResultsController.sections {
+            let info = sections[section]
+            return info.numberOfObjects
+        }
+        return 0
     }
     
     
