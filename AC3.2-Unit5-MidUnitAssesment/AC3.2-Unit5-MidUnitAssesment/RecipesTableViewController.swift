@@ -20,11 +20,15 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
+    var controller: NSFetchedResultsController<Recipe>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.title = titleForCell
+        initializeFetchedResultsController()
+        getData()
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 45
         
         // entering text in the textField in the Navigation Bar collects more recipe results
         // and should insert them into Core Data
@@ -38,6 +42,8 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
         let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
         self.tableView.tableHeaderView = searchBar
         searchBar.delegate = self
+        
+        tableView.register(UINib(nibName: "RecipeTableViewCell", bundle: nil), forCellReuseIdentifier: "cellID")
    }
 
     // get http://www.recipepuppy.com/api/?q=cookies by default
@@ -55,7 +61,10 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
        
                             // Comment #2
                             // insert your core data objects here
-                            
+                        for result in records {
+                            let recipe = Recipe(context: context    )
+                            recipe.populate(with: result)
+                        }
                             do {
                                 try context.save()
                             }
@@ -77,62 +86,84 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        guard let sections = controller.sections else {
+            return 0
+        }
+        return sections.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        guard let sections = controller.sections,
+            section < sections.count,
+            let objects = sections[section].objects else {
+                return 0
+        }
+        return objects.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath) as! RecipeTableViewCell
+        let object = controller.object(at: indexPath)
+        
+        cell.ingredientsLabel.text = object.ingredients!
+        cell.titleLabel.text = object.title!
+        cell.urlLabel.text = object.href!
+        
+        if let url = object.thumbnail {
+            APIRequestManager.manager.getData(endPoint: url) { (data: Data?) in
+                guard let data = data else { return }
+                DispatchQueue.main.async {
+                    cell.thumbNail.image = UIImage(data: data)
+                    cell.setNeedsLayout()
+                }
+            }
+        }
 
         return cell
     }
-    */
     
     // Comment #3
     // this function is based partly on our projects and partly 
     // on the Coffee Log app. It will require some customization
     // to this project.
-    func initializeFetchedResultsController() {
-//        let request: NSFetchRequest<Entry> = Entry.fetchRequest()
-//        let sort = NSSortDescriptor(key: "date", ascending: true)
-//        request.sortDescriptors = [sort]
-//        
-//        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
-//        fetchedResultsController.delegate = self
-//        
-//        do {
-//            try fetchedResultsController.performFetch()
-//        } catch {
-//            fatalError("Failed to initialize FetchedResultsController: \(error)")
-//        }
+    func initializeFetchedResultsController(search: String = ",") {
+        let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "ingredients CONTAINS[cd] %@", search)
+        request.predicate = predicate
+        let sort = NSSortDescriptor(key: "title", ascending: true)
+        request.sortDescriptors = [sort]
+        
+        self.controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
+        controller.delegate = self
+        
+        do {
+            try controller.performFetch()
+            self.tableView.reloadData()
+        } catch {
+            fatalError("Failed to initialize FetchedResultsController: \(error)")
+        }
+        
     }
     
     // MARK: - Search Bar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // Comment #4
-        self.initializeFetchedResultsController(/* you will need to re-init this with search/filter text*/)
+        self.initializeFetchedResultsController(search: searchText)
         self.tableView.reloadData()
     }
     
     // MARK: - Text Field
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let search = textField.text {
-            self.getData(search: search)
+            self.getData(search: search.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
             self.tableView.reloadData()
         }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let search = textField.text {
-            self.getData(search: search)
+            self.getData(search: search.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
             self.tableView.reloadData()
         }
         return true
