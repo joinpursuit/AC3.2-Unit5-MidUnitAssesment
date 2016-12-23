@@ -70,7 +70,7 @@ class DesignTwoViewController: UIViewController, CellTitled {
     }
     
     func configureConstraints() {
-        // something about these constraints isn't right...
+        //self.edgesForExtendedLayout = []
         self.automaticallyAdjustsScrollViewInsets = false
         
         let labelConstraints = [
