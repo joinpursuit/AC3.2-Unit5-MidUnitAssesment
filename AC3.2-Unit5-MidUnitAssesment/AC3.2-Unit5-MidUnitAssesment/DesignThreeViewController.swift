@@ -87,7 +87,7 @@ class DesignThreeViewController: UIViewController, CellTitled {
     super.viewDidLoad()
     
     self.setupViewHierarchy()
-    self.configurePortraitConstraints()
+    self.configureLandscapeConstraints()
   }
   
   func setupViewHierarchy() {
@@ -162,6 +162,11 @@ class DesignThreeViewController: UIViewController, CellTitled {
         likeLabelConstraints,
         hexLabelConstraints
       ].map{ $0.map{ $0.isActive = true } }
+    
+    bannerImageView.layer.zPosition = 1
+    contentView.layer.zPosition = 1
+    bannerImageView.isHidden = false
+    contentView.isHidden = false
   }
   
   func configureLandscapeConstraints() {
@@ -186,24 +191,42 @@ class DesignThreeViewController: UIViewController, CellTitled {
     ]
 
     let nameLabelConstraints = [
-        nameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 8.0),
+        nameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 12.0),
         nameLabel.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor),
     ]
     
     let followLabelConstraints = [
-        followLabel.trailingAnchor.constraint(equalTo: likeLabel.leadingAnchor, constant: 8.0),
-        followLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: -8.0)
+        followLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
+        followLabel.widthAnchor.constraint(equalToConstant: 75),
+        followLabel.trailingAnchor.constraint(equalTo: likeLabel.leadingAnchor, constant: 12.0)
     ]
     
     let likeLabelConstraints = [
-        likeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
-        likeLabel.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor),
-    ]
+        likeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
+        likeLabel.widthAnchor.constraint(equalToConstant: 75),
+        likeLabel.centerXAnchor.constraint(equalTo: nameLabel.centerXAnchor),
+        ]
     
     let hexLabelConstraints = [
-        hexLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
-        hexLabel.leadingAnchor.constraint(equalTo: likeLabel.trailingAnchor, constant: -8.0)
+        hexLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
+        hexLabel.widthAnchor.constraint(equalToConstant: 75),
+        hexLabel.leadingAnchor.constraint(equalTo: likeLabel.trailingAnchor, constant: -12.0)
     ]
+    
+//    let followLabelConstraints = [
+//        followLabel.trailingAnchor.constraint(equalTo: likeLabel.leadingAnchor, constant: 8.0),
+//        followLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: -8.0)
+//    ]
+//    
+//    let likeLabelConstraints = [
+//        likeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
+//        likeLabel.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor),
+//    ]
+//    
+//    let hexLabelConstraints = [
+//        hexLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
+//        hexLabel.leadingAnchor.constraint(equalTo: likeLabel.trailingAnchor, constant: -8.0)
+//    ]
     
     let _ = [
         profileImageConstraints,
@@ -214,7 +237,9 @@ class DesignThreeViewController: UIViewController, CellTitled {
         ].map{ $0.map{ $0.isActive = true } }
     
     self.edgesForExtendedLayout = .bottom
-    
+    likeLabel.textAlignment = .center
+    followLabel.textAlignment = .center
+    hexLabel.textAlignment = .center
     
   }
   
