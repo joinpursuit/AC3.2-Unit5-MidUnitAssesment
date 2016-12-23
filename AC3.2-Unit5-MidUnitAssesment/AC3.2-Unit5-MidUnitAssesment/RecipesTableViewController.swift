@@ -101,24 +101,33 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        // from coffeeLog
+        if let sections = fetchedResultsController.sections {
+            return sections.count
+        }
         return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        // from coffeeLog
+        if let sections = fetchedResultsController.sections {
+            let info: NSFetchedResultsSectionInfo = sections[section]
+            return info.numberOfObjects
+        }
         return 0
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell", for: indexPath) as! CustomTableViewCell
+        let object = fetchedResultsController.object(at: indexPath)
+        cell.recipeTitle?.text = object.recipeTitle
+        cell.ingredients?.text = object.ingredients
+        cell.href?.text = object.href
 
         return cell
     }
-    */
+    
     
     // Comment #3
     // this function is based partly on our projects and partly 

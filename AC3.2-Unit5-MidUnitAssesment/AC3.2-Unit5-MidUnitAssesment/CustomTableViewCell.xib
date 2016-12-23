@@ -12,9 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomTableViewCell" customModule="AC3_2_Unit5_MidUnitAssesment" customModuleProvider="target">
             <connections>
+                <outlet property="href" destination="gcX-Bh-Ajq" id="Efc-4Y-Ff5"/>
                 <outlet property="ingredients" destination="Txc-eD-xUK" id="cse-h4-UE5"/>
                 <outlet property="recipeTitle" destination="1d9-xO-s1k" id="N1K-Qv-pqK"/>
-                <outlet property="webAddress" destination="gcX-Bh-Ajq" id="R9p-Te-tsx"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
