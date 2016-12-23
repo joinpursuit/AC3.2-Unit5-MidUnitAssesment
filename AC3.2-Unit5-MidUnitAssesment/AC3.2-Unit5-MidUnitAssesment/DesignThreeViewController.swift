@@ -220,6 +220,7 @@ class DesignThreeViewController: UIViewController, CellTitled {
     self.setupViewHierarchy()
     self.configureLandscapeConstraints()
     
+    /* insert some code i wasn't able to look up */
     
     // switch to landscape/portrait using UITraitCollection's info about size class
   }
