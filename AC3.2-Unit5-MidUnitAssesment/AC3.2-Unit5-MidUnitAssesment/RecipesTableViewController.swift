@@ -14,7 +14,7 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
    
     // Comment #1
     // fix the declaration of fetchedResultsController
-    //var fetchedResultsController: NSFetchedResultsController<Entry>!
+    var fetchedResultsController: NSFetchedResultsController<Recipie>!
 
     var mainContext: NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -25,6 +25,10 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
         super.viewDidLoad()
 
         self.title = titleForCell
+        self.tableView.register(UINib(nibName: "RecipieTableViewCell", bundle: nil), forCellReuseIdentifier: "RecipieTableViewCell")
+        tableView.estimatedRowHeight = 300
+        
+        initializeFetchedResultsController()
         
         // entering text in the textField in the Navigation Bar collects more recipe results
         // and should insert them into Core Data
@@ -50,11 +54,18 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
                         
                         let appDelegate = UIApplication.shared.delegate as! AppDelegate
                         let pc = appDelegate.persistentContainer
+                        
                         pc.performBackgroundTask { (context: NSManagedObjectContext) in
+                            
                             context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
        
                             // Comment #2
                             // insert your core data objects here
+                            
+                            for recipieDict in records {
+                                let recipe = NSEntityDescription.insertNewObject(forEntityName: "Recipie", into: context) as! Recipie
+                                recipe.populate(from: recipieDict)
+                            }
                             
                             do {
                                 try context.save()
@@ -77,48 +88,58 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        guard let sections = fetchedResultsController.sections else { return 0 }
+        return sections.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        guard let sections = fetchedResultsController.sections else { return 0 }
+        return sections[section].numberOfObjects
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RecipieTableViewCell", for: indexPath) as! RecipieTableViewCell
+        let recipie = fetchedResultsController.object(at: indexPath)
+        cell.titleLabel.text = recipie.title
+        cell.ingredientsLabel.text = recipie.ingredients
+        cell.urlLabel.text = recipie.url
         return cell
     }
-    */
+    
+    // Stack Overflow...
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
     
     // Comment #3
     // this function is based partly on our projects and partly 
     // on the Coffee Log app. It will require some customization
     // to this project.
-    func initializeFetchedResultsController() {
-//        let request: NSFetchRequest<Entry> = Entry.fetchRequest()
-//        let sort = NSSortDescriptor(key: "date", ascending: true)
-//        request.sortDescriptors = [sort]
-//        
-//        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
-//        fetchedResultsController.delegate = self
-//        
-//        do {
-//            try fetchedResultsController.performFetch()
-//        } catch {
-//            fatalError("Failed to initialize FetchedResultsController: \(error)")
-//        }
+    func initializeFetchedResultsController(filter: String? = nil) {
+        let request: NSFetchRequest<Recipie> = Recipie.fetchRequest()
+        let titleSort = NSSortDescriptor(key: "title", ascending: true)
+        request.sortDescriptors = [titleSort]
+        if let filter = filter {
+            let predicate: NSPredicate = NSPredicate(format: "title CONTAINS[c] %@ or ingredients CONTAINS[c] %@", filter, filter)
+            request.predicate = predicate
+        }
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController.delegate = self
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError("Failed to initialize FetchedResultsController: \(error)")
+        }
     }
     
     // MARK: - Search Bar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // Comment #4
-        self.initializeFetchedResultsController(/* you will need to re-init this with search/filter text*/)
+        self.initializeFetchedResultsController(filter: searchText)
         self.tableView.reloadData()
     }
     

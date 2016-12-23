@@ -88,6 +88,9 @@ class DesignThreeViewController: UIViewController, CellTitled {
     
     self.setupViewHierarchy()
     self.configurePortraitConstraints()
+    //self.configureLandscapeConstraints()
+    
+   // NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
   }
   
   func setupViewHierarchy() {
@@ -102,6 +105,8 @@ class DesignThreeViewController: UIViewController, CellTitled {
   }
   
   func configurePortraitConstraints() {
+    bannerImageView.isHidden = false
+    contentView.isHidden = false
     bannerImageView.translatesAutoresizingMaskIntoConstraints = false
     profileImageView.translatesAutoresizingMaskIntoConstraints = false
     nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -165,14 +170,87 @@ class DesignThreeViewController: UIViewController, CellTitled {
   }
   
   func configureLandscapeConstraints() {
+    bannerImageView.isHidden = true
+    contentView.isHidden = true
     
+    profileImageView.translatesAutoresizingMaskIntoConstraints = false
+    nameLabel.translatesAutoresizingMaskIntoConstraints = false
+    followLabel.translatesAutoresizingMaskIntoConstraints = false
+    likeLabel.translatesAutoresizingMaskIntoConstraints = false
+    hexLabel.translatesAutoresizingMaskIntoConstraints = false
+    
+    bannerImageView.translatesAutoresizingMaskIntoConstraints = true
+    contentView.translatesAutoresizingMaskIntoConstraints = true
+
+    
+    let profileImageConstraints = [
+        // why doesn't this know where the middle of the view is in landsacpe!!!!????
+        profileImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        profileImageView.heightAnchor.constraint(equalToConstant: 120.0),
+        profileImageView.widthAnchor.constraint(equalToConstant: 120.0)
+    ]
+    
+    let nameLabelConstraints = [
+        nameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 8.0),
+        nameLabel.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor),
+    ]
+    
+    let followLabelConstraints = [
+        followLabel.trailingAnchor.constraint(equalTo: likeLabel.leadingAnchor, constant: -8.0),
+        followLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8.0)
+    ]
+    
+    let likeLabelConstraints = [
+        likeLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8.0),
+        likeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+    ]
+    
+    let hexLabelConstraints = [
+        hexLabel.leadingAnchor.constraint(equalTo: likeLabel.trailingAnchor, constant: 8.0),
+        hexLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8.0)
+    ]
+
+    let _ = [
+        profileImageConstraints,
+        nameLabelConstraints,
+        followLabelConstraints,
+        likeLabelConstraints,
+        hexLabelConstraints
+        ].map{ $0.map{ $0.isActive = true } }
   }
   
   override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-    super.willTransition(to: newCollection, with: coordinator)
-    
     // switch to landscape/portrait using UITraitCollection's info about size class
+    
+    self.view.removeConstraints(self.view.constraints)
+    let currentCollection = self.traitCollection
+    
+    if (currentCollection.verticalSizeClass == .compact) && (newCollection.verticalSizeClass == .regular) {
+        print("portrait")
+        configurePortraitConstraints()
+    }
+    else {
+        print("landscape")
+        configureLandscapeConstraints()
+    }
+    super.willTransition(to: newCollection, with: coordinator)
   }
+    
+    // found this solution on stack overflow, using notification center... doesn't work.
+    //http://stackoverflow.com/questions/25666269/how-to-detect-orientation-change
+    
+//    func rotated() {
+//        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
+//            print("landscape")
+//            configureLandscapeConstraints()
+//        }
+//        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
+//            print("portrait")
+//            configurePortraitConstraints()
+//        }
+//        
+//    }
   
   
 }
