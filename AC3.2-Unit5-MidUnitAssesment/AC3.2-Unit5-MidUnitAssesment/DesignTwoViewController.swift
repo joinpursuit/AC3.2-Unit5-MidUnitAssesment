@@ -88,6 +88,8 @@ class DesignTwoViewController: UIViewController, CellTitled {
     let imageConstraints = [
       smittenKittenImageView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
       smittenKittenImageView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
+      smittenKittenImageView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
+        smittenKittenImageView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor)
     ]
     
     let _ = [labelConstraints, scrollViewConstraints, imageConstraints].map{ $0.map{ $0.isActive = true } }
