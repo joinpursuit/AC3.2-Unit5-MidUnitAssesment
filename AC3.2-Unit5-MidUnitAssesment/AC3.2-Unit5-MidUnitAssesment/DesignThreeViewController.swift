@@ -167,13 +167,10 @@ class DesignThreeViewController: UIViewController, CellTitled {
   func configureLandscapeConstraints() {
     
     // what i would want to do is remove the views that are not present
-    
-    self.view.backgroundColor = .white
-    self.view.addSubview(profileImageView)
-    self.view.addSubview(nameLabel)
-    self.view.addSubview(followLabel)
-    self.view.addSubview(likeLabel)
-    self.view.addSubview(hexLabel)
+    bannerImageView.layer.zPosition = -12
+    contentView.layer.zPosition = -12
+    bannerImageView.isHidden = true
+    contentView.isHidden = true
     
     profileImageView.translatesAutoresizingMaskIntoConstraints = false
     nameLabel.translatesAutoresizingMaskIntoConstraints = false
