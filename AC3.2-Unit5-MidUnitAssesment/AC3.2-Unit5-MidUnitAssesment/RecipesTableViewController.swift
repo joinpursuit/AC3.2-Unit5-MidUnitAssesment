@@ -25,9 +25,11 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
         super.viewDidLoad()
         
         self.title = titleForCell
+        getData()
+        initializeFetchedResultsController()
+        self.tableView.register(UINib(nibName: "RecipesTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier)
         
-        self.tableView.register(UINib(nibName: "RecipesTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: reuseIdentifier)
-        
+        tableView.rowHeight = 200
         
         // entering text in the textField in the Navigation Bar collects more recipe results
         // and should insert them into Core Data
