@@ -48,7 +48,6 @@ class DesignOneViewController: UIViewController, CellTitled {
   func setupViewHierarchy() {
     // Add Views Here
     self.view.addSubview(grayContainer)
-    self.view.addSubview(peachView)
     self.view.addSubview(oneLabel)
     self.view.addSubview(twoLabel)
     self.view.addSubview(threeLabel)
@@ -73,11 +72,14 @@ class DesignOneViewController: UIViewController, CellTitled {
     numStack.addArrangedSubview(oneLabel)
     
    
-    let colorViews = [peachView, beigeView1, beigeView2, greenView1, greenView2]
-    for view in colorViews {
+    let colorViews1 = [peachView, beigeView1, beigeView2, greenView1, greenView2]
+    for view in colorViews1 {
         colorStack1.addArrangedSubview(view)
-        
-        
+    }
+    
+    let colorViews2 = [peachView2, beigeView12, beigeView22, greenView12, greenView22]
+    for view in colorViews2 {
+        colorStack2.addArrangedSubview(view)
     }
     
     
@@ -89,14 +91,6 @@ class DesignOneViewController: UIViewController, CellTitled {
   
   func configureConstraints() {
     // Add Constraints Here
-    
-//    let peachViewConstraints = [
-//        peachView.heightAnchor.constraint(equalToConstant: 20.0),
-//        peachView.widthAnchor.constraint(equalToConstant: 100.0),
-//        peachView.leadingAnchor.constraint(equalTo: fiveLabel.leadingAnchor),
-//        peachView.bottomAnchor.constraint(equalTo: fiveLabel.bottomAnchor)
-//    ]
-    
     let grayContainerConstraints = [
         grayContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         grayContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -128,7 +122,7 @@ class DesignOneViewController: UIViewController, CellTitled {
         colorStack2.topAnchor.constraint(equalTo: grayContainer.topAnchor, constant: 30.0),
         colorStack2.bottomAnchor.constraint(equalTo: grayContainer.bottomAnchor, constant: -30.0),
         
-        colorStack2.trailingAnchor.constraint(equalTo: numStack.leadingAnchor, constant: -40.0)
+        colorStack2.leadingAnchor.constraint(equalTo: numStack.trailingAnchor, constant: 40.0)
         
     ]
     
@@ -137,7 +131,7 @@ class DesignOneViewController: UIViewController, CellTitled {
         audioLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8.0)
     ]
     
-    let _ = [grayContainerConstraints,  audioLabelConstraints, lrStackConstraints, numStackConstraints, colorStack1Constraints,
+    let _ = [grayContainerConstraints,  audioLabelConstraints, lrStackConstraints, numStackConstraints, colorStack1Constraints, colorStack2Constraints,
         ].map { $0.map { $0.isActive = true }}
   }
   
@@ -183,6 +177,51 @@ class DesignOneViewController: UIViewController, CellTitled {
     }()
     
     let greenView2: UIView = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 51/255, green: 204/255, blue: 153/255, alpha: 1.0)
+        view.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
+        view.widthAnchor.constraint(equalToConstant: 100.0).isActive = true
+        return view
+    }()
+    
+    let peachView2: UIView = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 253/255, green: 153/255, blue: 153/255, alpha: 1.0)
+        view.heightAnchor.constraint(equalToConstant: 10.0).isActive = true
+        view.widthAnchor.constraint(equalToConstant: 100.0).isActive = true
+        return view
+    }()
+    
+    let beigeView12: UIView = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 255/255, green: 218/255, blue: 185/255, alpha: 1.0)
+        view.heightAnchor.constraint(equalToConstant: 10.0).isActive = true
+        view.widthAnchor.constraint(equalToConstant: 100.0).isActive = true
+        return view
+    }()
+    
+    let beigeView22: UIView = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 255/255, green: 218/255, blue: 185/255, alpha: 1.0)
+        view.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
+        view.widthAnchor.constraint(equalToConstant: 100.0).isActive = true
+        return view
+    }()
+    
+    let greenView12: UIView = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 51/255, green: 204/255, blue: 153/255, alpha: 1.0)
+        view.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
+        view.widthAnchor.constraint(equalToConstant: 100.0).isActive = true
+        return view
+    }()
+    
+    let greenView22: UIView = {
         let view: UIView = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(red: 51/255, green: 204/255, blue: 153/255, alpha: 1.0)
@@ -292,7 +331,7 @@ class DesignOneViewController: UIViewController, CellTitled {
         stack.axis = .vertical
         stack.distribution = .fillEqually
         stack.alignment = .fill
-        stack.spacing = 5
+        stack.spacing = 65
         stack.translatesAutoresizingMaskIntoConstraints = false
         
         
