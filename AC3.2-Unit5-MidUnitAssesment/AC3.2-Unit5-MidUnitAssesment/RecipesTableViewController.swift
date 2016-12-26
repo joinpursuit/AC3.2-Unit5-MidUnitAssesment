@@ -27,7 +27,7 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
         // Register cell classes
         //self.tableView!.register(UITableViewCell.self, forCellWithReuseIdentifier: "reuseidentifier")
         
-        self.tableView!.register(UINib(nibName:"RecipeTableViewCell", bundle: nil), forCellWithReuseIdentifier: "reuseidentifier")
+//        self.tableView!.register(UINib(nibName:"RecipeTableViewCell", bundle: nil), forCellWithReuseIdentifier: "reuseidentifier")
         
         
         self.title = titleForCell
@@ -108,8 +108,8 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! RecipeTableViewCell
         
         // Configure the cell...
-        let recipe = fetchedResultsController.object(at: indexPath)
-        cell.recipeTitle.text = recipe.title
+        //let recipe = fetchedResultsController.object(at: indexPath)
+        
         
         return cell
     }

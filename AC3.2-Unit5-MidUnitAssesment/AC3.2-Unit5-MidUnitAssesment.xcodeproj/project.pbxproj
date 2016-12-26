@@ -18,6 +18,7 @@
 		14AE97001E0CF393002E066A /* DesignThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AE96FF1E0CF393002E066A /* DesignThreeViewController.swift */; };
 		1E245A521E0D0550007A8064 /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E245A511E0D0550007A8064 /* APIRequestManager.swift */; };
 		1EC1CFE61E0CD78D00634BC5 /* RecipesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC1CFE41E0CD78D00634BC5 /* RecipesTableViewController.swift */; };
+		E3D7E3F21E10C557006DC983 /* RecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D7E3F11E10C557006DC983 /* RecipesView.swift */; };
 		E3EB96091E0DB4A500C068E4 /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EB96081E0DB4A500C068E4 /* RecipeTableViewCell.swift */; };
 		E3EB960B1E0DB4C100C068E4 /* RecipeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3EB960A1E0DB4C100C068E4 /* RecipeTableViewCell.xib */; };
 		E3EB960D1E0DB58900C068E4 /* Recipe+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EB960C1E0DB58900C068E4 /* Recipe+JSON.swift */; };
@@ -37,6 +38,7 @@
 		14AE96FF1E0CF393002E066A /* DesignThreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignThreeViewController.swift; sourceTree = "<group>"; };
 		1E245A511E0D0550007A8064 /* APIRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
 		1EC1CFE41E0CD78D00634BC5 /* RecipesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesTableViewController.swift; sourceTree = "<group>"; };
+		E3D7E3F11E10C557006DC983 /* RecipesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesView.swift; sourceTree = "<group>"; };
 		E3EB96081E0DB4A500C068E4 /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecipeTableViewCell.swift; path = ../RecipeTableViewCell.swift; sourceTree = "<group>"; };
 		E3EB960A1E0DB4C100C068E4 /* RecipeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RecipeTableViewCell.xib; path = ../RecipeTableViewCell.xib; sourceTree = "<group>"; };
 		E3EB960C1E0DB58900C068E4 /* Recipe+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Recipe+JSON.swift"; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			children = (
 				1EC1CFE41E0CD78D00634BC5 /* RecipesTableViewController.swift */,
 				E3EB96081E0DB4A500C068E4 /* RecipeTableViewCell.swift */,
+				E3D7E3F11E10C557006DC983 /* RecipesView.swift */,
 				E3EB960C1E0DB58900C068E4 /* Recipe+JSON.swift */,
 				E3EB960A1E0DB4C100C068E4 /* RecipeTableViewCell.xib */,
 			);
@@ -205,6 +208,7 @@
 				14229F481E0C8594000085ED /* DesignOneViewController.swift in Sources */,
 				1EC1CFE61E0CD78D00634BC5 /* RecipesTableViewController.swift in Sources */,
 				14AE96FE1E0CDF6C002E066A /* DesignTwoViewController.swift in Sources */,
+				E3D7E3F21E10C557006DC983 /* RecipesView.swift in Sources */,
 				14AE97001E0CF393002E066A /* DesignThreeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

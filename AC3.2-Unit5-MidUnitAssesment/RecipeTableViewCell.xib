@@ -2,36 +2,29 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11201"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="RecipeTableViewCell" customModule="AC3_2_Unit5_MidUnitAssesment" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="651" height="485"/>
+            <rect key="frame" x="0.0" y="0.0" width="654" height="180"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ke-uv-l5t">
-                    <constraints>
-                        <constraint firstAttribute="width" constant="175" id="1NE-Yg-iBd"/>
-                        <constraint firstAttribute="height" constant="46" id="wRM-oI-lg3"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pMT-wt-fCh" customClass="RecipesView" customModule="AC3_2_Unit5_MidUnitAssesment" customModuleProvider="target">
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="1ke-uv-l5t" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="JDn-4i-HJp"/>
-                <constraint firstItem="1ke-uv-l5t" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="VGZ-Ys-XeD"/>
+                <constraint firstAttribute="trailing" secondItem="pMT-wt-fCh" secondAttribute="trailing" id="89N-i6-e6E"/>
+                <constraint firstItem="pMT-wt-fCh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fdM-EN-yyc"/>
+                <constraint firstAttribute="bottom" secondItem="pMT-wt-fCh" secondAttribute="bottom" id="glq-4D-dCE"/>
+                <constraint firstItem="pMT-wt-fCh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="mc1-UZ-u8U"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <outlet property="recipeTitle" destination="1ke-uv-l5t" id="IYq-Ln-Dak"/>
-            </connections>
-            <point key="canvasLocation" x="224.5" y="-36.5"/>
+            <point key="canvasLocation" x="226" y="-189"/>
         </view>
     </objects>
 </document>
