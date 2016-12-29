@@ -72,9 +72,14 @@ class DesignTwoViewController: UIViewController, CellTitled {
   func configureConstraints() {
     // something about these constraints isn't right...
     
+    // 1. Set the edgesForExtendedLayout to empty array
+    self.edgesForExtendedLayout = []
+    
     let labelConstraints = [
       smittenKittenLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 16.0),
-      smittenKittenLabel.centerXAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24.0)
+      
+      // 2. Change this from leading + 24.0 to centerXAnchor + 0.0
+      smittenKittenLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
     ]
     
     let scrollViewConstraints = [
@@ -87,9 +92,13 @@ class DesignTwoViewController: UIViewController, CellTitled {
     let imageConstraints = [
       smittenKittenImageView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
       smittenKittenImageView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
+      
+      // 3. Add in trailing and bottom anchors from the image to the scroll view to
+      // expand the contentSize of the scroll view
+      smittenKittenImageView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor),
+      smittenKittenImageView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor)
     ]
     
-    let _ = [labelConstraints, scrollViewConstraints, imageConstraints].map{ $0.map{ $0.isActive = true } }
-  }
+    let _ = [labelConstraints, scrollViewConstraints, imageConstraints].map{ $0.map{ $0.isActive = true } }  }
   
 }
