@@ -39,6 +39,9 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
         self.tableView.tableHeaderView = searchBar
         searchBar.delegate = self
         
+        self.tableView.estimatedRowHeight = 10
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        
         self.tableView.register(UINib(nibName: "RecipeTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "RecipeCell")
     }
     
@@ -106,12 +109,11 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as! RecipeTableViewCell
-        self.tableView.rowHeight = 100.0
         
         let recipe = fetchedResultsController.object(at: indexPath)
-        cell.RecipeView.titleLabel.text = recipe.title
-        cell.RecipeView.ingredientsLabel.text = recipe.ingredients
-        cell.RecipeView.urlLabel.text = recipe.url
+        cell.titleLabel.text = recipe.title
+        cell.ingredientsLabel.text = recipe.ingredients
+        cell.urlLabel.text = recipe.url
         
         return cell
     }
@@ -128,10 +130,16 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     //    request.predicate = predicate
     
     
-    func initializeFetchedResultsController() {
+    func initializeFetchedResultsController(filter: String? = nil) {
         let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()
         let sort = NSSortDescriptor(key: "title", ascending: true)
         request.sortDescriptors = [sort]
+        
+        // filter != "" makes empty searchBar repopulate instead of stay empty
+        if let filter = filter, filter != "" {
+            let predicate = NSPredicate(format: "title CONTAINS[c] %@", filter)
+            request.predicate = predicate
+        }
         
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: "title", cacheName: nil)
         fetchedResultsController.delegate = self
@@ -146,7 +154,7 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     // MARK: - Search Bar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // Comment #4
-        self.predicateSearch(search: searchText)
+        self.initializeFetchedResultsController(filter: searchText)
         self.tableView.reloadData()
     }
     
@@ -165,22 +173,6 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
         }
         return true
     }
-    
-    func predicateSearch(search: String) {
-        let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()
-        let sort = NSSortDescriptor(key: "title", ascending: true)
-        let predicate = NSPredicate(format: "%K LIKE %@", "title", "*\(search)*")
-        request.sortDescriptors = [sort]
-        request.predicate = predicate
-        
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: "title", cacheName: nil)
-        fetchedResultsController.delegate = self
-        
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            fatalError("Failed to initialize FetchedResultsController: \(error)")
-        }
-    }
+
 
 }
