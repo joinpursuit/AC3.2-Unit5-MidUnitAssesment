@@ -76,8 +76,7 @@ class DesignTwoViewController: UIViewController, CellTitled {
     
     let labelConstraints = [
       smittenKittenLabel.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 16.0),
-      smittenKittenLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-      smittenKittenLabel.heightAnchor.constraint(equalToConstant: 30.0)
+      smittenKittenLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
     ]
     
     let scrollViewConstraints = [
@@ -89,13 +88,12 @@ class DesignTwoViewController: UIViewController, CellTitled {
     
     let imageConstraints = [
       smittenKittenImageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-      smittenKittenImageView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
-      smittenKittenImageView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor),
-      smittenKittenImageView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
-      smittenKittenImageView.heightAnchor.constraint(equalTo: self.scrollView.heightAnchor),
-      smittenKittenImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 2.0)
+      smittenKittenImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+      
+      smittenKittenImageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+      smittenKittenImageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
     ]
-    let _ = [labelConstraints, scrollViewConstraints, imageConstraints].map{ $0.map{ $0.isActive = true } }
+        let _ = [labelConstraints, scrollViewConstraints, imageConstraints].map{ $0.map{ $0.isActive = true } }
   }
   
 }
