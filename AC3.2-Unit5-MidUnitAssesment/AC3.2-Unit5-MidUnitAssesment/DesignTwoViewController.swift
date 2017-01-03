@@ -72,6 +72,7 @@ class DesignTwoViewController: UIViewController, CellTitled {
   
   func configureConstraints() {
     // something about these constraints isn't right...
+    self.edgesForExtendedLayout = []
     
     let labelConstraints = [
       smittenKittenLabel.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 16.0),

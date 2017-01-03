@@ -23,16 +23,5 @@ extension Recipe {
 }
 
 
-/*
- do {
- let els = try moc.fetch(request)
- 
- for el in els {
- print("\(el.group) \(el.number) \(el.symbol)")
- }
- }
- catch {
- print("error fetching")
- }
- */
+
  
