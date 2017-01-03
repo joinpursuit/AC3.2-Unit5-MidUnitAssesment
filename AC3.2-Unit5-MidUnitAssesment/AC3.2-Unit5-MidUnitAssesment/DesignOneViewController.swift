@@ -236,7 +236,7 @@ class DesignOneViewController: UIViewController, CellTitled {
      let grayContainer: UIView = {
         let view: UIView = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .lightGray
+           view.backgroundColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
         return view
     }()
   
