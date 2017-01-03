@@ -23,6 +23,8 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initializeFetchedResultsController()
+        getData()
 
         self.title = titleForCell
         
@@ -39,8 +41,7 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
         self.tableView.tableHeaderView = searchBar
         searchBar.delegate = self
         
-//        initializeFetchedResultsController()
-//        getData()
+        
     }
 
     // get http://www.recipepuppy.com/api/?q=cookies by default
