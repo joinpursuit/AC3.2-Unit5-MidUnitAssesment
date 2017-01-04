@@ -9,7 +9,10 @@
 import UIKit
 import CoreData
 
+// in nib file - set 3 labels constraints, change hugging priority for middle label, should be dynamic
+
 class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedResultsControllerDelegate, UISearchBarDelegate, UITextFieldDelegate {
+    let identifier = "recipeCell"
     var titleForCell = "Core Data"
     
     // Comment #1
@@ -23,12 +26,12 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Register cell classes
-        //self.tableView!.register(UITableViewCell.self, forCellWithReuseIdentifier: "reuseidentifier")
-        
-//        self.tableView!.register(UINib(nibName:"RecipeTableViewCell", bundle: nil), forCellWithReuseIdentifier: "reuseidentifier")
-        
+      
+        tableView.register(UINib(nibName:"RecipeTableViewCell", bundle: nil), forCellReuseIdentifier: identifier)
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 50
+       initializeFetchedResultsController()
+        getData()
         
         self.title = titleForCell
         
@@ -105,12 +108,14 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! RecipeTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! RecipeTableViewCell
         
         // Configure the cell...
-        //let recipe = fetchedResultsController.object(at: indexPath)
+        let recipe = fetchedResultsController.object(at: indexPath)
         
-        
+        cell.recipeTitle.text = recipe.title
+        cell.recipeIngredients.text = recipe.ingredients
+        cell.recipeUrl.text = recipe.url
         return cell
     }
     
@@ -119,11 +124,16 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     // this function is based partly on our projects and partly
     // on the Coffee Log app. It will require some customization
     // to this project.
-    func initializeFetchedResultsController() {
+    func initializeFetchedResultsController(searchTerm: String? = nil) {
         let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()
         let sort = NSSortDescriptor(key: "title", ascending: true)
         request.sortDescriptors = [sort]
-        
+        //
+        if let search = searchTerm {
+            let predicate = NSPredicate(format: "ingredients CONTAINS[c] %@", search) //compared to "like"
+            request.predicate = predicate
+        }
+        //
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController.delegate = self
         
@@ -137,7 +147,7 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     // MARK: - Search Bar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // Comment #4
-        self.initializeFetchedResultsController(/* you will need to re-init this with search/filter text*/)
+        self.initializeFetchedResultsController(searchTerm: searchText)
         self.tableView.reloadData()
     }
     
