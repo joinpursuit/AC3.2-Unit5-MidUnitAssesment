@@ -11,10 +11,11 @@ import CoreData
 
 class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedResultsControllerDelegate, UISearchBarDelegate, UITextFieldDelegate {
     var titleForCell = "Core Data"
-   
+    let identifier = "recipeCell"
+    
     // Comment #1
     // fix the declaration of fetchedResultsController
-    //var fetchedResultsController: NSFetchedResultsController<Entry>!
+    var fetchedResultsController: NSFetchedResultsController<Recipe>!
 
     var mainContext: NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -24,7 +25,19 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // by initializing the fetchedResultsController before setting anything
+        // on tableView we prevent crashing in the data source delegate methods
+        initializeFetchedResultsController()
+        getData()
+        
         self.title = titleForCell
+        
+        // we observed how estimatedRowHeight alone was enough to trigger automatic cell heights
+        tableView.estimatedRowHeight = 100
+        // but we should set this property too
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        tableView.register(UINib(nibName: "RecipeTableViewCell", bundle:nil), forCellReuseIdentifier: identifier)
         
         // entering text in the textField in the Navigation Bar collects more recipe results
         // and should insert them into Core Data
@@ -38,6 +51,8 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
         let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
         self.tableView.tableHeaderView = searchBar
         searchBar.delegate = self
+        
+
    }
 
     // get http://www.recipepuppy.com/api/?q=cookies by default
@@ -54,8 +69,11 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
                             context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
        
                             // Comment #2
-                            // insert your core data objects here
-                            
+                            // inserting and saving on the background context sent to this closure
+                            for record in records {
+                                let recipe = Recipe(context: context)
+                                recipe.populate(with: record)
+                            }
                             do {
                                 try context.save()
                             }
@@ -77,48 +95,67 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        // this guard also protects against crashes
+        // but is belt and suspenders with moving initializeFetchedResultsController as in viewDidLoad
+        guard fetchedResultsController != nil else {
+            return 0
+        }
+        if let sections = fetchedResultsController.sections {
+            return sections.count
+        }
         return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        if let sections = fetchedResultsController.sections {
+            return sections[section].numberOfObjects
+        }
         return 0
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! RecipeTableViewCell
 
-        // Configure the cell...
-
+        let recipe = fetchedResultsController.object(at: indexPath)
+        
+        cell.titleLabel.text = recipe.title
+        cell.hrefLabel.text = recipe.href
+        cell.ingredientsLabel.text = recipe.ingredients
+        
         return cell
     }
-    */
+    
     
     // Comment #3
     // this function is based partly on our projects and partly 
     // on the Coffee Log app. It will require some customization
     // to this project.
-    func initializeFetchedResultsController() {
-//        let request: NSFetchRequest<Entry> = Entry.fetchRequest()
-//        let sort = NSSortDescriptor(key: "date", ascending: true)
-//        request.sortDescriptors = [sort]
-//        
-//        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
-//        fetchedResultsController.delegate = self
-//        
-//        do {
-//            try fetchedResultsController.performFetch()
-//        } catch {
-//            fatalError("Failed to initialize FetchedResultsController: \(error)")
-//        }
+    func initializeFetchedResultsController(search: String? = nil) {
+        let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()
+        let sort = NSSortDescriptor(key: "title", ascending: true)
+        request.sortDescriptors = [sort]
+        
+        // don't add a predicate if the search is nil or the empty string
+        if let search = search, search != "" {
+            let predicate = NSPredicate(format: "ingredients contains[c] %@", search)
+            request.predicate = predicate
+        }
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController.delegate = self
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError("Failed to initialize FetchedResultsController: \(error)")
+        }
     }
     
     // MARK: - Search Bar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // Comment #4
-        self.initializeFetchedResultsController(/* you will need to re-init this with search/filter text*/)
+        self.initializeFetchedResultsController(search: searchText)
         self.tableView.reloadData()
     }
     
