@@ -71,9 +71,10 @@ class DesignTwoViewController: UIViewController, CellTitled {
   
   func configureConstraints() {
     // something about these constraints isn't right...
+    self.edgesForExtendedLayout = []
     
     let labelConstraints = [
-      smittenKittenLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 60.0),
+      smittenKittenLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 16.0),
       smittenKittenLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
     ]
     
@@ -81,12 +82,11 @@ class DesignTwoViewController: UIViewController, CellTitled {
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8.0),
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8.0),
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8.0),
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0.0)
+        //The code below is what ensures that the scrollView with the Image inside doesn't interfere with the smittenKittenLabel whatsever
+        scrollView.topAnchor.constraint(equalTo: smittenKittenLabel.bottomAnchor, constant: 16.0)
     ]
     
     let imageConstraints = [
-        smittenKittenImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 2.5),
-        smittenKittenImageView.heightAnchor.constraint(equalTo: self.view.heightAnchor),
         smittenKittenImageView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
         smittenKittenImageView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
         smittenKittenImageView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
