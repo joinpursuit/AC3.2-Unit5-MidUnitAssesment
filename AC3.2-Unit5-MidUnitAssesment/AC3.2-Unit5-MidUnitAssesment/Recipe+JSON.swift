@@ -8,3 +8,14 @@
 
 import Foundation
 
+extension Recipe {
+    func populate(with dict: [String: Any]) {
+        if let title = dict["title"] as? String,
+            let href = dict["href"] as? String,
+            let ingredients = dict["ingredeients"] as? String {
+            self.title = title
+            self.href = href
+            self.ingredients = ingredients
+        }
+    }
+}

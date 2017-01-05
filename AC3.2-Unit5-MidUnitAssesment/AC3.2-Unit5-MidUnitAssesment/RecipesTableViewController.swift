@@ -56,7 +56,7 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
                             // Comment #2
                             // insert your core data objects here
                             for record in records {
-                                let recipe = NSEntityDescription.insertNewObject(forEntityName: "Recipe", into: context)
+                                let recipe = NSEntityDescription.insertNewObject(forEntityName: "Recipe", into: context) as? Recipe
                             }
                             
                             do {
@@ -92,16 +92,18 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 1
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell", for: indexPath) as! RecipeTableViewCell
         
+        let recipe = fetchedResultsController.object(at: indexPath)
         
-        // Configure the cell...
-
+        cell.title.text = recipe.title
+        cell.href.text = recipe.href
+        cell.ingredients.text = recipe.ingredients
         return cell
     }
     
@@ -133,7 +135,7 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     // MARK: - Search Bar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // Comment #4
-        self.initializeFetchedResultsController(/* you will need to re-init this with search/filter text*/)
+        self.initializeFetchedResultsController(filter: searchText)
         self.tableView.reloadData()
     }
     
