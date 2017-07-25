@@ -150,7 +150,6 @@ class DesignOneViewController: UIViewController, CellTitled {
         grayView.addSubview(fiveRightView)
         
     }
-    //greenView.trailingAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     
     func configureConstraints() {
         // Add Constraints Here

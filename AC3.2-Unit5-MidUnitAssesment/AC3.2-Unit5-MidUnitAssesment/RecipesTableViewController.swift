@@ -27,6 +27,7 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
         self.title = titleForCell
         self.tableView.register(UINib(nibName: "RecipieTableViewCell", bundle: nil), forCellReuseIdentifier: "RecipieTableViewCell")
         tableView.estimatedRowHeight = 300
+        tableView.rowHeight = UITableViewAutomaticDimension
         navigationItem.rightBarButtonItem = editButtonItem
         
         initializeFetchedResultsController()
@@ -180,7 +181,7 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
         let sectionSort = NSSortDescriptor(key: "searchWord", ascending: true)
         let titleSort = NSSortDescriptor(key: "title", ascending: true)
         request.sortDescriptors = [sectionSort, titleSort]
-        if let filter = filter {
+        if let filter = filter, filter.characters.count > 0 {
             let predicate: NSPredicate = NSPredicate(format: "title CONTAINS[c] %@ or ingredients CONTAINS[c] %@", filter, filter)
             request.predicate = predicate
         }
