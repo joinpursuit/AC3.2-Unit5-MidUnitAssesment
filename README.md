@@ -23,7 +23,7 @@ You must design a layout purely using code (no nibs, no storyboards). See image 
 - It should be obvious where each `let` margin is used in the image
 - Vertical spacing between the left/right and "Audio Channels" label is up to you. Just ensure that left/right is centered with respect to their column of views and "Audio Channel" is centered in the view. 
 
-![Audio Levels](./Images/audio levels.png)
+![Audio Levels](./Images/audio%20levels.png)
 
 ---
 #### Design 2: 
@@ -38,7 +38,7 @@ The layout for our Smitt'n Kitt'n image viewer isn't working. Please fix the mis
 - You will need to somehow account for the size of the status bar + navigation bar when aligning your top label
 - When you view the project in its current state, you are viewing the top-left corner of the imageView
 
-![Smitten Kitten](./Images/Smitten Kitten.png)
+![Smitten Kitten](./Images/Smitten%20Kitten.png)
 
 ---
 #### Design 3: 
@@ -47,9 +47,9 @@ The layout for our Smitt'n Kitt'n image viewer isn't working. Please fix the mis
 
 Snape has just completed his profile on Wizard-Finder.net. You need to ensure that his profile in landscape mode matches the image provided. Currently, the portrait setting is working properly. 
 
-![Snape - Portrait](./Images/Snape Profile.png)
+![Snape - Portrait](./Images/Snape%20Profile.png)
 
-![Snape - Landscape](./Images/Snape Profile - Landscape.png)
+![Snape - Landscape](./Images/Snape%20Profile%20-%20Landscape.png)
 
 ---
 ### Part 2: Core Data and Nib-backed Table View Cells
