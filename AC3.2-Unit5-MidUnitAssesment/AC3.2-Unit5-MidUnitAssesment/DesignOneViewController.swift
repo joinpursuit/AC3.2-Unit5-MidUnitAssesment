@@ -46,12 +46,32 @@ class DesignOneViewController: UIViewController, CellTitled {
   
   
   func setupViewHierarchy() {
-    // Add Views Here
+    self.view.addSubview(grayContainer)
+    self.view.addSubview(bottomView)
+    self.grayContainer.translatesAutoresizingMaskIntoConstraints = false
+    self.bottomView.translatesAutoresizingMaskIntoConstraints = false
+    
   }
   
   
   func configureConstraints() {
-    // Add Constraints Here
+    let _ = [
+        grayContainer.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8.0),
+        grayContainer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -8.0),
+        
+        grayContainer.bottomAnchor.constraint(equalTo: self.bottomView.topAnchor),
+        grayContainer.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 8.0)
+        ].map{ $0.isActive = true }
+    
+   
+    let _ = [
+        bottomView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8.0),
+        bottomView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -8.0),
+        bottomView.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.topAnchor, constant: -8.0),
+        bottomView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15)
+        ].map{ $0.isActive = true }
+    
+    
   }
   
   
@@ -62,6 +82,19 @@ class DesignOneViewController: UIViewController, CellTitled {
   // let leftGreen1: UIView = ... your code here ...
   // let leftGreen2: UIView = ... your code here ...
   //
-  
+    
+    lazy var grayContainer: audioChannelSection = {
+        let view = audioChannelSection()
+        view.backgroundColor = UIColor.lightGray
+        return view
+    }()
+    
+    lazy var bottomView: bottomLabelSection = {
+        let bottomV = bottomLabelSection()
+        bottomV.backgroundColor = .black
+        return bottomV
+    }()
+    
+    
 
 }
