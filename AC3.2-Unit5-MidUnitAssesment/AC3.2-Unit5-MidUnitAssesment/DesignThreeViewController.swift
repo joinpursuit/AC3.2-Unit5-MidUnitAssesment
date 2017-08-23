@@ -100,6 +100,14 @@ class DesignThreeViewController: UIViewController, CellTitled {
     self.view.addSubview(likeLabel)
     self.view.addSubview(hexLabel)
   }
+    
+    func setupViewHierarchyForLanscape() {
+        self.view.backgroundColor = .white
+        self.view.addSubview(profileImageView)
+        self.view.addSubview(likeLabel)
+        self.view.addSubview(followLabel)
+        self.view.addSubview(hexLabel)
+    }
   
   func configurePortraitConstraints() {
     bannerImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -165,13 +173,62 @@ class DesignThreeViewController: UIViewController, CellTitled {
   }
   
   func configureLandscapeConstraints() {
+    profileImageView.translatesAutoresizingMaskIntoConstraints = false
+    followLabel.translatesAutoresizingMaskIntoConstraints = false
+    likeLabel.translatesAutoresizingMaskIntoConstraints = false
+    hexLabel.translatesAutoresizingMaskIntoConstraints = false
+    let profileImageConstraints = [
+        profileImageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+        profileImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+        profileImageView.heightAnchor.constraint(equalToConstant: 120.0),
+        profileImageView.widthAnchor.constraint(equalToConstant: 120.0)
+        ].map{ $0.isActive = true }
+    
+    let likeLabelConstraints = [
+        likeLabel.topAnchor.constraint(equalTo: self.profileImageView.bottomAnchor, constant: 8.0),
+        likeLabel.centerXAnchor.constraint(equalTo: self.profileImageView.centerXAnchor),
+        ].map{ $0.isActive = true }
+    
+    let followLabelConstraints = [
+        followLabel.trailingAnchor.constraint(equalTo: self.likeLabel.leadingAnchor, constant: -8.0),
+        
+        followLabel.firstBaselineAnchor.constraint(equalTo: likeLabel.firstBaselineAnchor)
+    ].map{ $0.isActive = true }
+    
+    let hexLabelConstraints = [
+        hexLabel.leadingAnchor.constraint(equalTo: self.likeLabel.trailingAnchor, constant: 8.0),
+        hexLabel.firstBaselineAnchor.constraint(equalTo: followLabel.firstBaselineAnchor)
+    ].map{ $0.isActive = true }
     
   }
   
   override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
     super.willTransition(to: newCollection, with: coordinator)
     
+    let oldTraitCollection = self.traitCollection
+    print("\n\n\n")
+    print(oldTraitCollection)
+    print("\n\n\n")
+    print(newCollection)
+    for constraints in view.constraints {
+        self.view.removeConstraint(constraints)
+    }
+    
+    for view in self.view.subviews {
+        view.removeFromSuperview()
+    }
+    
     // switch to landscape/portrait using UITraitCollection's info about size class
+    if (oldTraitCollection.verticalSizeClass == .compact) && (newCollection.verticalSizeClass == .regular) {
+        self.setupViewHierarchy()
+        configurePortraitConstraints()
+        
+    }
+    else {
+        self.setupViewHierarchyForLanscape()
+        configureLandscapeConstraints()
+        
+    }
   }
   
   
