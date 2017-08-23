@@ -23,7 +23,7 @@ class DesignTwoViewController: UIViewController, CellTitled {
   lazy var smittenKittenImageView: UIImageView = {
     let image = UIImage(named: "smitten_kitten")
     let imageView = UIImageView(image: image)
-    imageView.contentMode = .scaleAspectFit
+    imageView.contentMode = .scaleAspectFill
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
@@ -67,29 +67,50 @@ class DesignTwoViewController: UIViewController, CellTitled {
     self.view.addSubview(smittenKittenLabel)
     
     self.scrollView.addSubview(smittenKittenImageView)
+   
+
   }
   
   func configureConstraints() {
     // something about these constraints isn't right...
+ //self.edgesForExtendedLayout = []
     
     let labelConstraints = [
       smittenKittenLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 16.0),
-      smittenKittenLabel.centerXAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24.0)
+      smittenKittenLabel.centerXAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10.0),
+
     ]
     
     let scrollViewConstraints = [
       scrollView.topAnchor.constraint(equalTo: self.smittenKittenLabel.bottomAnchor, constant: 16.0),
       scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8.0),
       scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -8.0),
-      scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -8.0)
+      scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -8.0),
+      scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: -8.0),
+      scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 8.0)
     ]
-    
+    let widthHeightScrollConstrints = [
+        smittenKittenImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5),
+        smittenKittenImageView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.8),
+        smittenKittenImageView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor),
+        smittenKittenImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+        smittenKittenImageView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
+        smittenKittenImageView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
+        smittenKittenImageView.leftAnchor.constraint(equalTo: self.scrollView.leftAnchor),
+        smittenKittenImageView.rightAnchor.constraint(equalTo: self.scrollView.rightAnchor)
+
+    ]
     let imageConstraints = [
       smittenKittenImageView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
       smittenKittenImageView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
+      smittenKittenImageView.rightAnchor.constraint(equalTo: self.scrollView.rightAnchor),
+      smittenKittenImageView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
+      smittenKittenImageView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
+      smittenKittenImageView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor)
     ]
     
-    let _ = [labelConstraints, scrollViewConstraints, imageConstraints].map{ $0.map{ $0.isActive = true } }
-  }
+    let _ = [labelConstraints, scrollViewConstraints, imageConstraints, widthHeightScrollConstrints].map{ $0.map{ $0.isActive = true } }
   
+  
+    }
 }

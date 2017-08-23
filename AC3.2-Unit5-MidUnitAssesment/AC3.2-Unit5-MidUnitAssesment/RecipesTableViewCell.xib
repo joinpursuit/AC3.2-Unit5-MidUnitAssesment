@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecipesTableViewCell" customModule="AC3_2_Unit5_MidUnitAssesment" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="coreData" rowHeight="94" id="KGk-i7-Jjw" customClass="RecipesTableViewCell" customModule="AC3_2_Unit5_MidUnitAssesment" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="315" height="94"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <frame key="frameInset" width="315" height="93"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="16x-eb-hgh">
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="URL" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4J-eJ-atR">
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="8"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFU-1J-BBb">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ki-ky-ICl">
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="8"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="9Ki-ky-ICl" secondAttribute="trailing" id="5fv-jc-e4A"/>
+                            <constraint firstItem="V4J-eJ-atR" firstAttribute="centerX" secondItem="16x-eb-hgh" secondAttribute="centerX" id="Chs-2B-txQ"/>
+                            <constraint firstAttribute="trailing" secondItem="sFU-1J-BBb" secondAttribute="trailing" id="FGY-zB-h02"/>
+                            <constraint firstItem="sFU-1J-BBb" firstAttribute="leading" secondItem="16x-eb-hgh" secondAttribute="leading" id="FQG-ZH-kJa"/>
+                            <constraint firstItem="sFU-1J-BBb" firstAttribute="centerX" secondItem="16x-eb-hgh" secondAttribute="centerX" id="PAi-M3-CuE"/>
+                            <constraint firstItem="V4J-eJ-atR" firstAttribute="top" secondItem="9Ki-ky-ICl" secondAttribute="bottom" id="S38-Dh-3eB"/>
+                            <constraint firstItem="9Ki-ky-ICl" firstAttribute="top" secondItem="sFU-1J-BBb" secondAttribute="bottom" constant="3" id="X9s-6q-4x3"/>
+                            <constraint firstItem="9Ki-ky-ICl" firstAttribute="centerX" secondItem="16x-eb-hgh" secondAttribute="centerX" id="bbj-xj-i6k"/>
+                            <constraint firstItem="V4J-eJ-atR" firstAttribute="leading" secondItem="16x-eb-hgh" secondAttribute="leading" id="fb7-Jq-gtn"/>
+                            <constraint firstAttribute="trailing" secondItem="V4J-eJ-atR" secondAttribute="trailing" id="nvS-Lk-vHP"/>
+                            <constraint firstItem="sFU-1J-BBb" firstAttribute="top" secondItem="16x-eb-hgh" secondAttribute="top" id="tey-tz-5O4"/>
+                            <constraint firstItem="9Ki-ky-ICl" firstAttribute="leading" secondItem="16x-eb-hgh" secondAttribute="leading" id="wj6-F8-TEk"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="16x-eb-hgh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="3XO-Ew-S0I"/>
+                    <constraint firstAttribute="bottom" secondItem="16x-eb-hgh" secondAttribute="bottom" id="EaI-fJ-2ck"/>
+                    <constraint firstItem="16x-eb-hgh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="swW-2v-rCS"/>
+                    <constraint firstAttribute="trailing" secondItem="16x-eb-hgh" secondAttribute="trailing" id="vMW-ta-RTr"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ingredientsLabel" destination="9Ki-ky-ICl" id="vtr-zX-APC"/>
+                <outlet property="titleLabel" destination="sFU-1J-BBb" id="kp2-1C-a0V"/>
+                <outlet property="urlLabel" destination="V4J-eJ-atR" id="fWo-Ob-S99"/>
+                <outlet property="view" destination="16x-eb-hgh" id="rwy-Ep-E0p"/>
+            </connections>
+            <point key="canvasLocation" x="24.5" y="-23"/>
+        </tableViewCell>
+    </objects>
+</document>
