@@ -42,26 +42,149 @@ class DesignOneViewController: UIViewController, CellTitled {
     self.setupViewHierarchy()
     self.configureConstraints()
     self.title = titleForCell
+    
+    label1.text = "1"
+    label2.text = "2"
+    label3.text = "3"
+    label4.text = "4"
+    label5.text = "5"
+    labelRight.textColor = .white
+    labelRight.text = "Right"
+    labelLeft.text = "Left"
+    labelLeft.textColor = .white
+    labelAudio.text = "Audio Channels"
+    labelAudio.textColor = .white
   }
-  
   
   func setupViewHierarchy() {
-    // Add Views Here
-  }
+    view.addSubview(grayView)
+    view.addSubview(redViewRight)
+    view.addSubview(redViewLeft)
+    view.addSubview(yellowViewLeftTop)
+    view.addSubview(yellowViewLeftBottom)
+    view.addSubview(yellowViewRightTop)
+    view.addSubview(yellowViewRightBottom)
+    view.addSubview(greenViewLeftTop)
+    view.addSubview(greenViewLeftBottom)
+    view.addSubview(greenViewRightTop)
+    view.addSubview(greenViewRightBottom)
+    view.addSubview(label1)
+    view.addSubview(label2)
+    view.addSubview(label3)
+    view.addSubview(label4)
+    view.addSubview(label5)
+    view.addSubview(labelLeft)
+    view.addSubview(labelRight)
+    view.addSubview(labelAudio)
+    }
   
   
   func configureConstraints() {
-    // Add Constraints Here
+    grayView.translatesAutoresizingMaskIntoConstraints = false
+    redViewRight.translatesAutoresizingMaskIntoConstraints = false
+    redViewLeft.translatesAutoresizingMaskIntoConstraints = false
+    yellowViewLeftBottom.translatesAutoresizingMaskIntoConstraints = false
+    yellowViewLeftTop.translatesAutoresizingMaskIntoConstraints = false
+    yellowViewRightTop.translatesAutoresizingMaskIntoConstraints = false
+    yellowViewRightBottom.translatesAutoresizingMaskIntoConstraints = false
+    greenViewLeftTop.translatesAutoresizingMaskIntoConstraints = false
+    greenViewRightTop.translatesAutoresizingMaskIntoConstraints = false
+    greenViewLeftBottom.translatesAutoresizingMaskIntoConstraints = false
+    greenViewRightBottom.translatesAutoresizingMaskIntoConstraints = false
+    
+    grayView.backgroundColor = soundBarGray
+    redViewLeft.backgroundColor = soundBarRed
+    redViewRight.backgroundColor = soundBarRed
+    yellowViewLeftTop.backgroundColor = soundBarYellow
+    yellowViewLeftBottom.backgroundColor = soundBarYellow
+    yellowViewRightTop.backgroundColor = soundBarYellow
+    yellowViewRightBottom.backgroundColor = soundBarYellow
+    greenViewLeftTop.backgroundColor = soundBarGreen
+    greenViewLeftBottom.backgroundColor = soundBarGreen
+    greenViewRightTop.backgroundColor = soundBarGreen
+    greenViewRightBottom.backgroundColor = soundBarGreen
+    
+    
+
+    grayView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    grayView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    grayView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true
+    grayView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.7).isActive = true
+    
+    redViewLeft.centerYAnchor.constraint(equalTo: grayView.topAnchor, constant: 30.0).isActive = true
+    redViewLeft.widthAnchor.constraint(equalTo: grayView.widthAnchor, multiplier: 0.25).isActive = true
+    redViewLeft.heightAnchor.constraint(equalTo: grayView.heightAnchor, multiplier: 0.07).isActive = true
+    redViewLeft.leadingAnchor.constraint(equalTo: grayView.leadingAnchor, constant: 30).isActive = true
+    
+    redViewRight.centerYAnchor.constraint(equalTo: grayView.topAnchor, constant: 30.0).isActive = true
+    redViewRight.widthAnchor.constraint(equalTo: grayView.widthAnchor, multiplier: 0.25).isActive = true
+    redViewRight.heightAnchor.constraint(equalTo: grayView.heightAnchor, multiplier: 0.07).isActive = true
+    redViewRight.leadingAnchor.constraint(equalTo: grayView.centerXAnchor, constant: 30.0).isActive = true
+    
+    yellowViewLeftTop.centerYAnchor.constraint(equalTo: redViewLeft.bottomAnchor, constant: 60.0).isActive = true
+    yellowViewLeftTop.widthAnchor.constraint(equalTo: redViewLeft.widthAnchor).isActive = true
+    yellowViewLeftTop.heightAnchor.constraint(equalTo: redViewLeft.heightAnchor).isActive = true
+    yellowViewLeftTop.leadingAnchor.constraint(equalTo: redViewLeft.leadingAnchor).isActive = true
+
+    yellowViewRightTop.centerYAnchor.constraint(equalTo: redViewRight.bottomAnchor, constant: 60.0).isActive = true
+    yellowViewRightTop.widthAnchor.constraint(equalTo: redViewRight.widthAnchor).isActive = true
+    yellowViewRightTop.heightAnchor.constraint(equalTo: redViewRight.heightAnchor).isActive = true
+    yellowViewRightTop.leadingAnchor.constraint(equalTo: redViewRight.leadingAnchor).isActive = true
+    
+    yellowViewRightBottom.centerYAnchor.constraint(equalTo: yellowViewRightTop.bottomAnchor, constant: 60.0).isActive = true
+    yellowViewRightBottom.widthAnchor.constraint(equalTo: yellowViewRightTop.widthAnchor).isActive = true
+    yellowViewRightBottom.heightAnchor.constraint(equalTo: yellowViewRightTop.heightAnchor).isActive = true
+    yellowViewRightBottom.leadingAnchor.constraint(equalTo: yellowViewRightTop.leadingAnchor).isActive = true
+    
+    yellowViewLeftBottom.centerYAnchor.constraint(equalTo: yellowViewLeftTop.bottomAnchor, constant: 60.0).isActive = true
+    yellowViewLeftBottom.widthAnchor.constraint(equalTo: yellowViewLeftTop.widthAnchor).isActive = true
+    yellowViewLeftBottom.heightAnchor.constraint(equalTo: yellowViewLeftTop.heightAnchor).isActive = true
+    yellowViewLeftBottom.leadingAnchor.constraint(equalTo: yellowViewLeftTop.leadingAnchor).isActive = true
+    
+    //green rects go here:
+    greenViewLeftTop.centerYAnchor.constraint(equalTo: yellowViewLeftBottom.bottomAnchor, constant: 60.0).isActive = true
+    greenViewLeftTop.widthAnchor.constraint(equalTo: yellowViewLeftBottom.widthAnchor).isActive = true
+    greenViewLeftTop.heightAnchor.constraint(equalTo: yellowViewLeftBottom.heightAnchor).isActive = true
+    greenViewLeftTop.leadingAnchor.constraint(equalTo: yellowViewLeftBottom.leadingAnchor).isActive = true
+    
+    greenViewRightTop.centerYAnchor.constraint(equalTo: yellowViewRightBottom.bottomAnchor, constant: 60.0).isActive = true
+    greenViewRightTop.widthAnchor.constraint(equalTo: yellowViewRightBottom.widthAnchor).isActive = true
+    greenViewRightTop.heightAnchor.constraint(equalTo: yellowViewRightBottom.heightAnchor).isActive = true
+    greenViewRightTop.leadingAnchor.constraint(equalTo: yellowViewRightBottom.leadingAnchor).isActive = true
+    
+    greenViewRightBottom.centerYAnchor.constraint(equalTo: greenViewRightTop.bottomAnchor, constant: 60.0).isActive = true
+    greenViewRightBottom.widthAnchor.constraint(equalTo: greenViewRightTop.widthAnchor).isActive = true
+    greenViewRightBottom.heightAnchor.constraint(equalTo: greenViewRightTop.heightAnchor).isActive = true
+    greenViewRightBottom.leadingAnchor.constraint(equalTo: greenViewRightTop.leadingAnchor).isActive = true
+    
+    greenViewLeftBottom.centerYAnchor.constraint(equalTo: greenViewLeftTop.bottomAnchor, constant: 60.0).isActive = true
+    greenViewLeftBottom.widthAnchor.constraint(equalTo: greenViewLeftTop.widthAnchor).isActive = true
+    greenViewLeftBottom.heightAnchor.constraint(equalTo: greenViewLeftTop.heightAnchor).isActive = true
+    greenViewLeftBottom.leadingAnchor.constraint(equalTo: greenViewLeftTop.leadingAnchor).isActive = true
+    
+    labelAudio.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 5.0).isActive = true
+    labelAudio.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
   }
   
   
   // MARK: - Define Your Views Here
-  
-  // ex: 
-  // let grayContainer: UIView = ... your code here ...
-  // let leftGreen1: UIView = ... your code here ...
-  // let leftGreen2: UIView = ... your code here ...
-  //
-  
-
-}
+    let grayView = UIView()
+    let redViewRight = UIView()
+    let redViewLeft = UIView()
+    let yellowViewRightTop = UIView()
+    let yellowViewRightBottom = UIView()
+    let yellowViewLeftTop = UIView()
+    let yellowViewLeftBottom = UIView()
+    let greenViewRightTop = UIView()
+    let greenViewRightBottom = UIView()
+    let greenViewLeftTop = UIView()
+    let greenViewLeftBottom = UIView()
+    let label1 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    let label2 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    let label3 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    let label4 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    let label5 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    let labelRight = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    let labelLeft = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    let labelAudio = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    }
