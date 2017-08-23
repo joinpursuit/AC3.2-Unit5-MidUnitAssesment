@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCellIdentifier" rowHeight="122" id="KGk-i7-Jjw" customClass="RecipesTableViewCell" customModule="AC3_2_Unit5_MidUnitAssesment" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="433" height="122"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="433" height="121"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PFQ-vL-ulh" userLabel="Title Label">
+                        <rect key="frame" x="16" y="16" width="401" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uYS-Lo-tjQ" userLabel="Ingredients Label">
+                        <rect key="frame" x="16" y="46.5" width="401" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4kQ-3z-wZ9" userLabel="URL Label">
+                        <rect key="frame" x="16" y="73.5" width="401" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="4kQ-3z-wZ9" secondAttribute="trailing" constant="8" id="0aG-Wi-f01"/>
+                    <constraint firstItem="PFQ-vL-ulh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="2RD-rz-A9J"/>
+                    <constraint firstItem="uYS-Lo-tjQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="5gX-vg-yrP"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="uYS-Lo-tjQ" secondAttribute="trailing" constant="8" id="Aln-9W-Tfc"/>
+                    <constraint firstItem="4kQ-3z-wZ9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="alE-vh-who"/>
+                    <constraint firstItem="4kQ-3z-wZ9" firstAttribute="top" secondItem="uYS-Lo-tjQ" secondAttribute="bottom" constant="10" id="ePS-Jb-HDt"/>
+                    <constraint firstItem="PFQ-vL-ulh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="kNn-vg-dUP"/>
+                    <constraint firstItem="uYS-Lo-tjQ" firstAttribute="top" secondItem="PFQ-vL-ulh" secondAttribute="bottom" constant="10" id="r1e-Ce-QC9"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="PFQ-vL-ulh" secondAttribute="trailing" constant="8" id="rW7-0g-m5M"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ingredientsLabel" destination="uYS-Lo-tjQ" id="iu7-L4-yNe"/>
+                <outlet property="titleLabel" destination="PFQ-vL-ulh" id="zDN-QM-rIt"/>
+                <outlet property="urlLabel" destination="4kQ-3z-wZ9" id="ZGl-Td-3fy"/>
+            </connections>
+            <point key="canvasLocation" x="90.5" y="99"/>
+        </tableViewCell>
+    </objects>
+</document>
