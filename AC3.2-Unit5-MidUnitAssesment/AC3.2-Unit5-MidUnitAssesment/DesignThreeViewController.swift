@@ -171,7 +171,6 @@ class DesignThreeViewController: UIViewController, CellTitled {
   override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
     super.willTransition(to: newCollection, with: coordinator)
     
-    // switch to landscape/portrait using UITraitCollection's info about size class
   }
   
   
