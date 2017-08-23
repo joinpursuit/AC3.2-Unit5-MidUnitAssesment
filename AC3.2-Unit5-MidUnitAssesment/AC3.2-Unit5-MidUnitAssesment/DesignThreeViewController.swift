@@ -165,11 +165,62 @@ class DesignThreeViewController: UIViewController, CellTitled {
   }
   
   func configureLandscapeConstraints() {
+    //bannerImageView.translatesAutoresizingMaskIntoConstraints = false
+    profileImageView.translatesAutoresizingMaskIntoConstraints = false
+    nameLabel.translatesAutoresizingMaskIntoConstraints = false
+    //contentView.translatesAutoresizingMaskIntoConstraints = false
+    followLabel.translatesAutoresizingMaskIntoConstraints = false
+    likeLabel.translatesAutoresizingMaskIntoConstraints = false
+    hexLabel.translatesAutoresizingMaskIntoConstraints = false
     
+    self.edgesForExtendedLayout = []
+    
+    let profileImageConstraints = [
+        profileImageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+        profileImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+        profileImageView.heightAnchor.constraint(equalToConstant: 120.0),
+        profileImageView.widthAnchor.constraint(equalToConstant: 120.0)
+    ]
+    
+    let nameLabelConstraints = [
+        nameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 8.0),
+        nameLabel.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor),
+        ]
+    
+    let followLabelConstraints = [
+        followLabel.firstBaselineAnchor.constraint(equalTo: likeLabel.firstBaselineAnchor),
+        followLabel.trailingAnchor.constraint(equalTo: likeLabel.leadingAnchor, constant: -8.0),
+    ]
+    
+    let likeLabelConstraints = [
+        likeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8.0),
+        likeLabel.centerXAnchor.constraint(equalTo: nameLabel.centerXAnchor),
+
+        ]
+    
+    let hexLabelConstraints = [
+        hexLabel.firstBaselineAnchor.constraint(equalTo: likeLabel.firstBaselineAnchor),
+        hexLabel.leadingAnchor.constraint(equalTo: likeLabel.trailingAnchor, constant: 8.0)
+    ]
+    
+    let _ = [
+        //bannerImageConstraints,
+        profileImageConstraints,
+        nameLabelConstraints,
+        //contentViewConstraints,
+        followLabelConstraints,
+        likeLabelConstraints,
+        hexLabelConstraints
+        ].map{ $0.map{ $0.isActive = true } }
   }
   
   override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
     super.willTransition(to: newCollection, with: coordinator)
+    
+    self.setupViewHierarchy()
+    self.configureLandscapeConstraints()
+    
+    /* insert some code i wasn't able to look up */
     
     // switch to landscape/portrait using UITraitCollection's info about size class
   }
