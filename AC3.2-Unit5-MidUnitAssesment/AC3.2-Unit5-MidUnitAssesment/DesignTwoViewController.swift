@@ -23,7 +23,7 @@ class DesignTwoViewController: UIViewController, CellTitled {
   lazy var smittenKittenImageView: UIImageView = {
     let image = UIImage(named: "smitten_kitten")
     let imageView = UIImageView(image: image)
-    imageView.contentMode = .scaleAspectFit
+    imageView.contentMode = .scaleToFill
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
@@ -54,6 +54,8 @@ class DesignTwoViewController: UIViewController, CellTitled {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.edgesForExtendedLayout = []
+    
     self.setupViewHierarchy()
     self.configureConstraints()
     
@@ -65,8 +67,47 @@ class DesignTwoViewController: UIViewController, CellTitled {
     
     self.view.addSubview(scrollView)
     self.view.addSubview(smittenKittenLabel)
-    
     self.scrollView.addSubview(smittenKittenImageView)
+
+    
+    //Adding Constraints to ScrollView
+    self.scrollView.translatesAutoresizingMaskIntoConstraints = false
+  
+    let _ = [
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8),
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60)].map {$0.isActive = true}
+    
+    
+       //Adding Constraints to smittenKittenLabel
+    
+    self.smittenKittenLabel.translatesAutoresizingMaskIntoConstraints = false
+    
+    let _ = [
+        
+        smittenKittenLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 8),
+        smittenKittenLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+        
+        ].map{$0.isActive = true}
+    
+    // Adding Contraints smittenKittenImageView
+    
+    self.smittenKittenImageView.translatesAutoresizingMaskIntoConstraints = false
+
+    let _ = [
+        smittenKittenImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 2.0),
+        smittenKittenImageView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 2.0),
+        
+        
+        smittenKittenImageView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
+        smittenKittenImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+        
+        smittenKittenImageView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor),
+        smittenKittenImageView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor)
+        
+        ].map{$0.isActive = true}
+
   }
   
   func configureConstraints() {
