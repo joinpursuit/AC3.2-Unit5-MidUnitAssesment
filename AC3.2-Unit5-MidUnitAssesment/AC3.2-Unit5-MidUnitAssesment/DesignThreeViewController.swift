@@ -165,13 +165,47 @@ class DesignThreeViewController: UIViewController, CellTitled {
   }
   
   func configureLandscapeConstraints() {
+    profileImageView.translatesAutoresizingMaskIntoConstraints = false
+    nameLabel.translatesAutoresizingMaskIntoConstraints = false
+    followLabel.translatesAutoresizingMaskIntoConstraints = false
+    likeLabel.translatesAutoresizingMaskIntoConstraints = false
+    hexLabel.translatesAutoresizingMaskIntoConstraints = false
     
+    let _ = [
+        profileImageView.centerYAnchor.constraint(equalTo: bannerImageView.bottomAnchor),
+        profileImageView.centerXAnchor.constraint(equalTo: bannerImageView.centerXAnchor),
+        profileImageView.heightAnchor.constraint(equalToConstant: 120.0),
+        profileImageView.widthAnchor.constraint(equalToConstant: 120.0)
+        ].map { $0.isActive = true }
+    
+    let _ = [
+        nameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 8.0),
+        nameLabel.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor),
+        ].map { $0.isActive = true }
+    
+    let _ = [
+        likeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8.0),
+        //likeLabel.firstBaselineAnchor.constraint(equalTo: followLabel.firstBaselineAnchor),
+        likeLabel.centerXAnchor.constraint(equalTo: nameLabel.centerXAnchor)
+        ].map { $0.isActive = true }
+    
+//    let _ = [
+//        followLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8.0),
+//        followLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -8.0)
+//    ].map { $0.isActive = true }
+//    
+//    let _ = [
+//        hexLabel.firstBaselineAnchor.constraint(equalTo: followLabel.firstBaselineAnchor),
+//        hexLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8.0)
+//    ].map { $0.isActive = true }
   }
   
   override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
     super.willTransition(to: newCollection, with: coordinator)
     
     // switch to landscape/portrait using UITraitCollection's info about size class
+
+   
   }
   
   
