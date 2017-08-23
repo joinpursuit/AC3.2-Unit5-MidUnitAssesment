@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="RecipeTableViewCell" customModule="AC3_2_Unit5_MidUnitAssesment" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="784" height="264"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pMT-wt-fCh">
+                    <rect key="frame" x="0.0" y="0.0" width="784" height="264"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4do-em-VqG">
+                            <rect key="frame" x="8" y="24" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gK2-Mf-7tM">
+                            <rect key="frame" x="8" y="53" width="42" height="112"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tSx-zu-8G9">
+                            <rect key="frame" x="8" y="185" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="tSx-zu-8G9" secondAttribute="bottom" constant="65" id="0pD-8y-Un9"/>
+                        <constraint firstItem="tSx-zu-8G9" firstAttribute="top" secondItem="gK2-Mf-7tM" secondAttribute="bottom" constant="20" id="4ah-fc-kpx"/>
+                        <constraint firstItem="gK2-Mf-7tM" firstAttribute="top" secondItem="4do-em-VqG" secondAttribute="bottom" constant="8" id="I22-Df-zHy"/>
+                        <constraint firstItem="gK2-Mf-7tM" firstAttribute="leading" secondItem="pMT-wt-fCh" secondAttribute="leading" constant="8" id="QZx-51-J1r"/>
+                        <constraint firstItem="tSx-zu-8G9" firstAttribute="leading" secondItem="pMT-wt-fCh" secondAttribute="leading" constant="8" id="ZXv-5M-bbN"/>
+                        <constraint firstItem="4do-em-VqG" firstAttribute="leading" secondItem="pMT-wt-fCh" secondAttribute="leading" constant="8" id="e0r-V6-Xwb"/>
+                        <constraint firstItem="4do-em-VqG" firstAttribute="top" secondItem="pMT-wt-fCh" secondAttribute="top" constant="24" id="pdv-vA-Vyt"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="pMT-wt-fCh" secondAttribute="trailing" id="89N-i6-e6E"/>
+                <constraint firstItem="pMT-wt-fCh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fdM-EN-yyc"/>
+                <constraint firstAttribute="bottom" secondItem="pMT-wt-fCh" secondAttribute="bottom" id="glq-4D-dCE"/>
+                <constraint firstItem="pMT-wt-fCh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="mc1-UZ-u8U"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="recipeIngredients" destination="gK2-Mf-7tM" id="IuB-VX-S2X"/>
+                <outlet property="recipeTitle" destination="4do-em-VqG" id="NPR-CY-Yaa"/>
+                <outlet property="recipeUrl" destination="tSx-zu-8G9" id="2UW-oU-fwW"/>
+            </connections>
+            <point key="canvasLocation" x="167" y="-170"/>
+        </view>
+    </objects>
+</document>
