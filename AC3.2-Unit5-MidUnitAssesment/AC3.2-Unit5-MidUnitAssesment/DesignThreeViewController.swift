@@ -92,6 +92,7 @@ class DesignThreeViewController: UIViewController, CellTitled {
   
   func setupViewHierarchy() {
     self.view.backgroundColor = .white
+     self.edgesForExtendedLayout = []
     self.view.addSubview(bannerImageView)
     self.view.addSubview(profileImageView)
     self.view.addSubview(nameLabel)
@@ -102,6 +103,17 @@ class DesignThreeViewController: UIViewController, CellTitled {
   }
   
   func configurePortraitConstraints() {
+    bannerImageView.isHidden = false
+    contentView.isHidden = false
+    
+    bannerImageView.removeConstraints(bannerImageView.constraints)
+    profileImageView.removeConstraints(profileImageView.constraints)
+    nameLabel.removeConstraints(nameLabel.constraints)
+    contentView.removeConstraints(contentView.constraints)
+    followLabel.removeConstraints(followLabel.constraints)
+    likeLabel.removeConstraints(likeLabel.constraints)
+    hexLabel.removeConstraints(hexLabel.constraints)
+    
     bannerImageView.translatesAutoresizingMaskIntoConstraints = false
     profileImageView.translatesAutoresizingMaskIntoConstraints = false
     nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -109,8 +121,6 @@ class DesignThreeViewController: UIViewController, CellTitled {
     followLabel.translatesAutoresizingMaskIntoConstraints = false
     likeLabel.translatesAutoresizingMaskIntoConstraints = false
     hexLabel.translatesAutoresizingMaskIntoConstraints = false
-    
-    self.edgesForExtendedLayout = []
     
     let bannerImageConstraints = [
       bannerImageView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -166,11 +176,65 @@ class DesignThreeViewController: UIViewController, CellTitled {
   
   func configureLandscapeConstraints() {
     
+    bannerImageView.isHidden = true
+    contentView.isHidden = true
+    
+    bannerImageView.removeConstraints(bannerImageView.constraints)
+    profileImageView.removeConstraints(profileImageView.constraints)
+    nameLabel.removeConstraints(nameLabel.constraints)
+    contentView.removeConstraints(contentView.constraints)
+    followLabel.removeConstraints(followLabel.constraints)
+    likeLabel.removeConstraints(likeLabel.constraints)
+    hexLabel.removeConstraints(hexLabel.constraints)
+    
+    
+    let profileImageConstraints = [
+        profileImageView.bottomAnchor.constraint(equalTo: self.view.centerYAnchor),
+        profileImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+        profileImageView.heightAnchor.constraint(equalToConstant: 120.0),
+        profileImageView.widthAnchor.constraint(equalToConstant: 120.0)
+    ]
+    
+    let nameLabelConstraints = [
+        nameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 8.0),
+        nameLabel.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor),
+    ]
+    
+    let followLabelConstraints = [
+        followLabel.centerYAnchor.constraint(equalTo: likeLabel.centerYAnchor),
+        followLabel.trailingAnchor.constraint(equalTo: likeLabel.leadingAnchor, constant: -10.0),
+        followLabel.widthAnchor.constraint(equalToConstant: 90)
+    ]
+    
+    let likeLabelConstraints = [
+        likeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8.0),
+        likeLabel.centerXAnchor.constraint(equalTo: nameLabel.centerXAnchor),
+        likeLabel.widthAnchor.constraint(equalToConstant: 90)
+    ]
+    
+    let hexLabelConstraints = [
+        hexLabel.centerYAnchor.constraint(equalTo: likeLabel.centerYAnchor),
+        hexLabel.leadingAnchor.constraint(equalTo: likeLabel.trailingAnchor, constant: 10.0),
+        hexLabel.widthAnchor.constraint(equalToConstant: 90)
+    ]
+    
+    let _ = [
+        profileImageConstraints,
+        nameLabelConstraints,
+        likeLabelConstraints,
+        followLabelConstraints,
+        hexLabelConstraints
+        ].map{ $0.map{ $0.isActive = true } }
   }
   
   override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
     super.willTransition(to: newCollection, with: coordinator)
-    
+    print(newCollection.verticalSizeClass.hashValue)
+    if newCollection.verticalSizeClass == .regular{
+            self.configurePortraitConstraints()
+    }else{
+        self.configureLandscapeConstraints()
+    }
     // switch to landscape/portrait using UITraitCollection's info about size class
   }
   

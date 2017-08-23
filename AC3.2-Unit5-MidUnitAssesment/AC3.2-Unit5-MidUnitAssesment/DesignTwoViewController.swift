@@ -62,11 +62,12 @@ class DesignTwoViewController: UIViewController, CellTitled {
   
   func setupViewHierarchy() {
     self.view.backgroundColor = smittenBackgroundColor
-    
-    self.view.addSubview(scrollView)
+    self.edgesForExtendedLayout = []
     self.view.addSubview(smittenKittenLabel)
-    
+    self.view.addSubview(scrollView)
+    scrollView.isScrollEnabled = true
     self.scrollView.addSubview(smittenKittenImageView)
+    
   }
   
   func configureConstraints() {
@@ -74,7 +75,7 @@ class DesignTwoViewController: UIViewController, CellTitled {
     
     let labelConstraints = [
       smittenKittenLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 16.0),
-      smittenKittenLabel.centerXAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24.0)
+      smittenKittenLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
     ]
     
     let scrollViewConstraints = [
@@ -87,6 +88,8 @@ class DesignTwoViewController: UIViewController, CellTitled {
     let imageConstraints = [
       smittenKittenImageView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
       smittenKittenImageView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
+      smittenKittenImageView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
+      smittenKittenImageView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor)
     ]
     
     let _ = [labelConstraints, scrollViewConstraints, imageConstraints].map{ $0.map{ $0.isActive = true } }
