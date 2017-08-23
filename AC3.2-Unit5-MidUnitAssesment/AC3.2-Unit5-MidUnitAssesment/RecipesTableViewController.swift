@@ -14,7 +14,7 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
    
     // Comment #1
     // fix the declaration of fetchedResultsController
-    //var fetchedResultsController: NSFetchedResultsController<Entry>!
+    var fetchedResultsController: NSFetchedResultsController<Recipies>!
 
     var mainContext: NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -23,6 +23,8 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initializeFetchedResultsController()
+        getData()
 
         self.title = titleForCell
         
@@ -38,7 +40,9 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
         let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
         self.tableView.tableHeaderView = searchBar
         searchBar.delegate = self
-   }
+        
+        
+    }
 
     // get http://www.recipepuppy.com/api/?q=cookies by default
     func getData(search: String = "cookies") {
@@ -52,12 +56,26 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
                         let pc = appDelegate.persistentContainer
                         pc.performBackgroundTask { (context: NSManagedObjectContext) in
                             context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-       
+                            
                             // Comment #2
                             // insert your core data objects here
+                            for record in records {
+                                let recipies = NSEntityDescription.insertNewObject(forEntityName: "Recipies", into: context) as! Recipies
+                                recipies.populate(from: record)
+                                print(recipies)
+                            }
                             
                             do {
                                 try context.save()
+                                
+//                                context.parent?.performAndWait {
+//                                    do {
+//                                        try context.parent?.save()
+//                                    }
+//                                    catch {
+//                                        fatalError("Failure to save context: \(error)")
+//                                    }
+//                                }
                             }
                             catch let error {
                                 print(error)
@@ -78,41 +96,50 @@ class RecipesTableViewController: UITableViewController, CellTitled, NSFetchedRe
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        //Crashes here dont know why
+        guard let sections = fetchedResultsController.sections else {
+            fatalError("No sections in fetchedResultsController")
+        }
+        let sectionInfo = sections[section]
+        return sectionInfo.numberOfObjects
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! RecipesTableViewCell
 
-        // Configure the cell...
+        let recipies = fetchedResultsController.object(at: indexPath)
+        
+        cell.recipesView.title.text = recipies.title
+        cell.recipesView.ingredients.text = recipies.ingredients
+        cell.recipesView.href.text = recipies.href
 
         return cell
     }
-    */
+ 
     
     // Comment #3
     // this function is based partly on our projects and partly 
     // on the Coffee Log app. It will require some customization
     // to this project.
     func initializeFetchedResultsController() {
-//        let request: NSFetchRequest<Entry> = Entry.fetchRequest()
-//        let sort = NSSortDescriptor(key: "date", ascending: true)
-//        request.sortDescriptors = [sort]
-//        
-//        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
-//        fetchedResultsController.delegate = self
-//        
-//        do {
-//            try fetchedResultsController.performFetch()
-//        } catch {
-//            fatalError("Failed to initialize FetchedResultsController: \(error)")
-//        }
+        let request: NSFetchRequest<Recipies> = Recipies.fetchRequest()
+        let sort = NSSortDescriptor(key: "date", ascending: true)
+        request.sortDescriptors = [sort]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController.delegate = self
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError("Failed to initialize FetchedResultsController: \(error)")
+        }
     }
     
     // MARK: - Search Bar
