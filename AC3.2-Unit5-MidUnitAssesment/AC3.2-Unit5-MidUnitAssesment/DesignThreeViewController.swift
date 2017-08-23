@@ -88,6 +88,9 @@ class DesignThreeViewController: UIViewController, CellTitled {
     
     self.setupViewHierarchy()
     self.configurePortraitConstraints()
+    //self.configureLandscapeConstraints()
+    
+   // NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
   }
   
   func setupViewHierarchy() {
@@ -99,9 +102,7 @@ class DesignThreeViewController: UIViewController, CellTitled {
     self.view.addSubview(followLabel)
     self.view.addSubview(likeLabel)
     self.view.addSubview(hexLabel)
-  }
-  
-  func configurePortraitConstraints() {
+    
     bannerImageView.translatesAutoresizingMaskIntoConstraints = false
     profileImageView.translatesAutoresizingMaskIntoConstraints = false
     nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -109,9 +110,17 @@ class DesignThreeViewController: UIViewController, CellTitled {
     followLabel.translatesAutoresizingMaskIntoConstraints = false
     likeLabel.translatesAutoresizingMaskIntoConstraints = false
     hexLabel.translatesAutoresizingMaskIntoConstraints = false
-    
+
     self.edgesForExtendedLayout = []
+  }
+  
+  func configurePortraitConstraints() {
     
+    // 6. remove any constraints for affected views that are owned by self.view
+    self.prepareForRotation([profileImageView, contentView, nameLabel, followLabel, hexLabel, likeLabel])
+    
+    // 7. Remove banner image's constraints again in order to set height
+    bannerImageView.removeConstraints(bannerImageView.constraints)
     let bannerImageConstraints = [
       bannerImageView.topAnchor.constraint(equalTo: view.topAnchor),
       bannerImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -131,6 +140,7 @@ class DesignThreeViewController: UIViewController, CellTitled {
       nameLabel.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor),
     ]
     
+    contentView.removeConstraints(contentView.constraints)
     let contentViewConstraints = [
       contentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8.0),
       contentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -8.0),
@@ -166,13 +176,115 @@ class DesignThreeViewController: UIViewController, CellTitled {
   
   func configureLandscapeConstraints() {
     
+    // 1. remove the constraints for views that are owned by self.view
+    self.prepareForRotation([profileImageView, contentView, nameLabel, followLabel, hexLabel, likeLabel])
+    
+    // 2. remove the height constraint, which is owned by its view
+    bannerImageView.removeConstraints(bannerImageView.constraints)
+    let bannerImageContraints = [
+        // 3. set height constraint to 0.0 to effectively hide the view
+        bannerImageView.heightAnchor.constraint(equalToConstant: 0.0)
+    ]
+    
+    contentView.removeConstraints(contentView.constraints)
+    // setting the leading equal to the trailing and the top equal to the bottom so that it doesn't appear
+    let contentViewConstraints = [
+        contentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+        contentView.topAnchor.constraint(equalTo: self.view.topAnchor),
+        contentView.trailingAnchor.constraint(equalTo: contentView.leadingAnchor),
+        contentView.bottomAnchor.constraint(equalTo: contentView.topAnchor)
+    ]
+    
+    // 4. Set x/y position for profile image, since it was removed by removeParentOwnedConstraints
+    //    - profile image owns its own width/height constraints, so nothing needs to change there as
+    //      it was not removed by calling removeParentOwnedConstraints
+    let profileImageConstraints = [
+        profileImageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+        profileImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+    ]
+    
+    let nameLabelConstraints = [
+        nameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 8.0),
+        nameLabel.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor),
+    ]
+    
+    let followLabelConstraints = [
+        followLabel.trailingAnchor.constraint(equalTo: likeLabel.leadingAnchor, constant: -8.0),
+        followLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8.0)
+    ]
+    
+    let likeLabelConstraints = [
+        likeLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8.0),
+        likeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+    ]
+    
+    let hexLabelConstraints = [
+        hexLabel.leadingAnchor.constraint(equalTo: likeLabel.trailingAnchor, constant: 8.0),
+        hexLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8.0)
+    ]
+
+    let _ = [
+        bannerImageContraints,
+        contentViewConstraints,
+        profileImageConstraints,
+        nameLabelConstraints,
+        followLabelConstraints,
+        likeLabelConstraints,
+        hexLabelConstraints
+        ].map{ $0.map{ $0.isActive = true } }
   }
   
   override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-    super.willTransition(to: newCollection, with: coordinator)
-    
     // switch to landscape/portrait using UITraitCollection's info about size class
-  }
-  
-  
+    super.willTransition(to: newCollection, with: coordinator)
+//    self.view.removeConstraints(self.view.constraints) 
+    
+    let currentCollection = self.traitCollection
+    
+    if (currentCollection.verticalSizeClass == .compact)  {
+        print("portrait")
+        configurePortraitConstraints()
+    }
+    else {
+        print("landscape")
+        configureLandscapeConstraints()
+    }
+}
+    
+    // MARK: - Helpers
+    
+    /// Calls `removeParentOwnedConstraints(from:)` on all views passed
+    /// - parameter views: An array of `UIView` who's constraints you'd like to remove from their parent view.
+    /// - seealso: `removeParentOwnedConstraints(from:)`
+    func prepareForRotation(_ views: [UIView]) {
+        let _ = views.map{ removeParentOwnedConstraints(from: $0) }
+    }
+    
+    /// Removes constraints owned by a view's `superview`, if it exists. Does nothing if `view` does not have a `superview`
+    /// - paramter thisView: A `UIView` who's constraints you'd like to remove from its parent view.
+    func removeParentOwnedConstraints(from thisView: UIView) {
+        
+        guard let parentView = thisView.superview else {
+            return
+        }
+        
+        let constraintsOwnedByParentView = parentView.constraints.filter { (constraint) -> Bool in
+            guard let secondItem = constraint.secondItem else { return false }
+            
+            if constraint.firstItem === thisView || secondItem === thisView {
+                return true
+            }
+            
+            // 👆 this up here acheives the same result as this down here 👇
+            
+//            if constraint.firstItem as! UIView == thisView || secondItem as! UIView == thisView {
+//                return true
+//            }
+            
+            return false
+        }
+        
+        parentView.removeConstraints(constraintsOwnedByParentView)
+    }
+    
 }
