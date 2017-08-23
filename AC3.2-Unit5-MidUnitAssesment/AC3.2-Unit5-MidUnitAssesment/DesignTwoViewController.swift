@@ -23,7 +23,7 @@ class DesignTwoViewController: UIViewController, CellTitled {
   lazy var smittenKittenImageView: UIImageView = {
     let image = UIImage(named: "smitten_kitten")
     let imageView = UIImageView(image: image)
-    imageView.contentMode = .scaleAspectFit
+    imageView.contentMode = .scaleAspectFit //Might need to change into Fill
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
@@ -61,20 +61,23 @@ class DesignTwoViewController: UIViewController, CellTitled {
   }
   
   func setupViewHierarchy() {
+
     self.view.backgroundColor = smittenBackgroundColor
     
     self.view.addSubview(scrollView)
     self.view.addSubview(smittenKittenLabel)
     
     self.scrollView.addSubview(smittenKittenImageView)
+    self.scrollView.translatesAutoresizingMaskIntoConstraints = false
   }
   
   func configureConstraints() {
     // something about these constraints isn't right...
+    self.edgesForExtendedLayout = []
     
     let labelConstraints = [
       smittenKittenLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 16.0),
-      smittenKittenLabel.centerXAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24.0)
+      smittenKittenLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
     ]
     
     let scrollViewConstraints = [
@@ -87,6 +90,8 @@ class DesignTwoViewController: UIViewController, CellTitled {
     let imageConstraints = [
       smittenKittenImageView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
       smittenKittenImageView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
+      smittenKittenImageView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor),
+      smittenKittenImageView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor)
     ]
     
     let _ = [labelConstraints, scrollViewConstraints, imageConstraints].map{ $0.map{ $0.isActive = true } }
